@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ENHANCE CLINIC · premium dermatology</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* ---------- CSS VARIABLES ---------- */
+        :root {
+            --primary: #6A4328;
+            --secondary: #F7F3EE;
+            --accent: #C8A56A;
+            --text-dark: #3A2A22;
+            --white: #FFFFFF;
+            --shadow: 0 12px 32px rgba(106, 67, 40, 0.06);
+            --radius: 20px;
+            --transition: 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--secondary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---------- TYPOGRAPHY ---------- */
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        h1,
+        h2,
+        h3,
+        .heading {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            line-height: 1.1;
+        }
+        h2 {
+            font-size: 2.6rem;
+            margin-bottom: 0.5rem;
+        }
+        h3 {
+            font-size: 1.6rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.4rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .section-sub {
+            color: #7a6a5e;
+            max-width: 540px;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+
+        /* ---------- BUTTONS ---------- */
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 2.8rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+            display: inline-block;
+            box-shadow: 0 8px 20px rgba(106, 67, 40, 0.15);
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn-primary:hover {
+            background: #7f5539;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 28px rgba(106, 67, 40, 0.2);
+        }
+
+        .btn-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            color: var(--primary);
+            border: none;
+            font-size: 1.4rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            animation: bounceDown 2s infinite;
+        }
+        .btn-circle:hover {
+            transform: scale(1.08);
+            background: var(--primary);
+            color: white;
+        }
+
+        @keyframes bounceDown {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(8px);
+            }
+        }
+
+        /* ---------- STICKY NAV ---------- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 18px 0;
+            transition: 0.4s ease;
+            background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            padding: 12px 0;
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo img {
+            height: 44px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+        .navbar.scrolled .logo img {
+            filter: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+        .nav-links a {
+            transition: 0.2s;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .navbar.scrolled .nav-links a {
+            color: var(--text-dark);
+            text-shadow: none;
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        .nav-links .btn-primary {
+            padding: 0.4rem 1.6rem;
+            font-size: 0.8rem;
+        }
+        .navbar.scrolled .nav-links .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: white;
+        }
+        .navbar.scrolled .hamburger {
+            color: var(--text-dark);
+        }
+
+        /* ---------- HERO (FULL SCREEN VIDEO) ---------- */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2a1f1a;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(42, 31, 26, 0.5), rgba(106, 67, 40, 0.3));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero-content .hero-logo {
+            max-width: 420px;
+            width: 100%;
+            margin: 0 auto 1.5rem;
+            filter: drop-shadow(0 4px 30px rgba(0, 0, 0, 0.2));
+        }
+
+        .hero-content .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            color: white;
+            padding: 0.3rem 1.6rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            max-width: 520px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            font-weight: 300;
+            color: white;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        /* ---------- SECTION TRANSITIONS (fade-up) ---------- */
+        .section-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1),
+                transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+        }
+
+        .section-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ---------- SECTION BASE ---------- */
+        section {
+            padding: 80px 0;
+        }
+
+        /* ---------- ABOUT ---------- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-image {
+            position: relative;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .about-image .floating-img {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            width: 40%;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
+        }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin-top: 24px;
+        }
+        .about-feature {
+            background: white;
+            padding: 16px 18px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0e8e0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .about-feature i {
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        /* ---------- SERVICES (6 CARDS WITH IMAGES & SORTED LISTS) ---------- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid #f2ece6;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(106, 67, 40, 0.1);
+        }
+        .service-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .service-card .service-body {
+            padding: 24px 26px 28px;
+            text-align: center;
+        }
+        .service-card .service-body h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+            color: var(--primary);
+        }
+        .service-card .service-body .service-icon {
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .service-card .service-body .service-list {
+            text-align: left;
+            margin: 12px 0 8px;
+            padding: 0 4px;
+        }
+        .service-card .service-body .service-list li {
+            list-style: none;
+            padding: 3px 0;
+            font-size: 0.85rem;
+            color: #5f4c3d;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #f5f0eb;
+        }
+        .service-card .service-body .service-list li:last-child {
+            border-bottom: none;
+        }
+        .service-card .service-body .service-list li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .service-card .read-more {
+            display: inline-block;
+            margin-top: 14px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--primary);
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid transparent;
+            transition: 0.2s;
+        }
+        .service-card .read-more:hover {
+            border-bottom-color: var(--primary);
+        }
+
+        /* ---------- PROMO BANNER ---------- */
+        .promo-banner {
+            background: linear-gradient(135deg, rgba(106, 67, 40, 0.92), rgba(61, 42, 32, 0.88)), url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=1200&auto=format&fit=crop') center/cover fixed;
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+        }
+        .promo-banner h2 {
+            font-size: 3.2rem;
+            margin-bottom: 0.6rem;
+        }
+        .promo-banner p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+        }
+
+        /* ---------- DOCTORS ---------- */
+        .doctors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .doctor-card {
+            text-align: center;
+            transition: var(--transition);
+        }
+        .doctor-card:hover {
+            transform: translateY(-4px);
+        }
+        .doctor-card img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border: 3px solid white;
+        }
+        .doctor-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+        .doctor-card p {
+            font-size: 0.8rem;
+            color: #6a5a4e;
+        }
+
+        /* ---------- STATS ---------- */
+        .stats-section {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        .stats-grid .stat-item h3 {
+            font-size: 2.6rem;
+            font-weight: 600;
+        }
+        .stats-grid .stat-item p {
+            opacity: 0.7;
+            letter-spacing: 1px;
+        }
+
+        /* ---------- GALLERY ---------- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 30px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow);
+        }
+        .gallery-grid .tall {
+            height: 260px;
+        }
+
+        /* ---------- PRICING ---------- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            margin-top: 30px;
+        }
+        .pricing-card {
+            background: white;
+            padding: 30px 24px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid #f2ece6;
+            transition: var(--transition);
+        }
+        .pricing-card:hover {
+            transform: translateY(-4px);
+        }
+        .pricing-card.featured {
+            border: 2px solid var(--accent);
+            position: relative;
+        }
+        .pricing-card.featured::before {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 1.4rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .pricing-card .price {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin: 12px 0;
+        }
+        .pricing-card ul {
+            list-style: none;
+            margin: 16px 0;
+        }
+        .pricing-card ul li {
+            padding: 4px 0;
+            font-size: 0.9rem;
+            color: #5f4c3d;
+        }
+
+        /* ---------- TESTIMONIALS ---------- */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .testimonial-item {
+            background: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .testimonial-item .stars {
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        .testimonial-item p {
+            font-style: italic;
+            color: #3d2a20;
+        }
+        .testimonial-item h5 {
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        /* ---------- FAQ ---------- */
+        .faq-item {
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0e8e0;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 18px 24px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-question i {
+            transition: 0.3s;
+        }
+        .faq-answer {
+            padding: 0 24px 20px;
+            color: #5f4c3d;
+            display: none;
+        }
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* ---------- BLOG ---------- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 28px;
+            margin-top: 30px;
+        }
+        .blog-card {
+            background: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .blog-card:hover {
+            transform: translateY(-4px);
+        }
+        .blog-card img {
+            height: 180px;
+            width: 100%;
+            object-fit: cover;
+        }
+        .blog-card .blog-body {
+            padding: 18px 20px;
+        }
+        .blog-card .blog-body h4 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 4px;
+        }
+        .blog-card .blog-body p {
+            font-size: 0.85rem;
+            color: #6a5a4e;
+        }
+        .blog-card .read-more {
+            font-weight: 500;
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        /* ---------- CONTACT ---------- */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        .contact-info p {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .contact-info i {
+            width: 24px;
+            color: var(--accent);
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #e0d6cc;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 14px;
+            background: white;
+            transition: 0.2s;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+        .contact-form button {
+            width: 100%;
+        }
+
+        /* ---------- FOOTER ---------- */
+        .footer {
+            background: var(--primary);
+            color: #f0e8e0;
+            padding: 50px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 30px;
+        }
+        .footer h4 {
+            color: white;
+            margin-bottom: 12px;
+            font-family: 'Playfair Display', serif;
+        }
+        .footer a {
+            color: #d4c5b8;
+            transition: 0.2s;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+        .footer a:hover {
+            color: white;
+        }
+        .footer .social a {
+            margin-right: 14px;
+            font-size: 1.2rem;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 20px;
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .hero-content .hero-logo {
+                max-width: 320px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                padding: 20px 0;
+                gap: 1rem;
+            }
+            .nav-links.open {
+                display: flex;
+            }
+            .hamburger {
+                display: block;
+            }
+            .navbar .container {
+                flex-wrap: wrap;
+            }
+            .hero-content .hero-logo {
+                max-width: 260px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            .doctors-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .promo-banner h2 {
+                font-size: 2rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn-circle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            .hero-content .hero-logo {
+                max-width: 200px;
+            }
+            .doctors-grid {
+                grid-template-columns: 1fr;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .service-card img {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="images/logo.png" alt="ENHANCE CLINIC" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:white;font-weight:700;font-size:1.4rem;\'>ENHANCE</span>'">
+            </a>
+            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            <div class="nav-links" id="navLinks">
+                <a href="#">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+                <a href="#" class="btn-primary">Book Consultation</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========== HERO - FULL SCREEN VIDEO ========== -->
+    <section class="hero" id="home">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="videos/hero-video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <img src="images/logo.png" alt="ENHANCE CLINIC" class="hero-logo" onerror="this.style.display='none'; this.parentElement.innerHTML += '<h1 class=\'font-playfair\' style=\'color:white;font-size:4rem;\'>ENHANCE CLINIC</h1>';">
+            <div class="badge"><i class="fas fa-spa"></i> premium aesthetics</div>
+            <p>Enhance Clinic offers professional aesthetic and skin care treatments designed to help you achieve healthier, brighter, and more youthful-looking skin in a safe and welcoming environment.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn-primary">Book Consultation</a>
+            </div>
+        </div>
+
+        <div class="hero-scroll-down">
+            <a href="#about" class="btn-circle" aria-label="Scroll down">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section id="about" style="background: white;">
+        <div class="container section-animate" id="aboutAnim">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="images/about.png" alt="Clinic interior">
+                    <img src="images/about-1.png" alt="Treatment" class="floating-img">
+                </div>
+                <div>
+                    <span class="section-tag">About Us</span>
+                    <h2 class="font-playfair">Beauty Begins with Expert Care</h2>
+                    <p style="color: #5f4c3d; margin: 16px 0;">At Enhance Clinic, we believe beauty is about confidence. Our goal is to provide personalized aesthetic treatments using modern technology, quality products, and professional care. Every treatment is tailored to your unique skin concerns, helping you achieve natural-looking, long-lasting results.</p>
+                    <div class="about-features">
+                        <div class="about-feature"><i class="fas fa-user-md"></i> Licensed Professionals</div>
+                        <div class="about-feature"><i class="fas fa-heart"></i> Personalized Treatments</div>
+                        <div class="about-feature"><i class="fas fa-microscope"></i> Modern Equipment</div>
+                        <div class="about-feature"><i class="fas fa-leaf"></i> Comfortable Environment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES (6 CARDS WITH IMAGES & SORTED LISTS) ========== -->
+    <section id="services">
+        <div class="container section-animate" id="servicesAnim">
+            <span class="section-tag">What We Offer</span>
+            <h2 class="font-playfair">Premium Services</h2>
+            <p class="section-sub">Comprehensive aesthetic and dermatological treatments tailored to your needs.</p>
+
+            <div class="services-grid">
+                <!-- Card 1: Facial & Skin Rejuvenation -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop" alt="Facial & Skin Rejuvenation">
+                    <div class="service-body">
+                        <div class="service-icon"><i class="fas fa-spa"></i></div>
+                        <h4>Facial & Skin Rejuvenation</h4>
+                        <ul class="service-list">
+                            <li>Facial Treatments</li>
+                            <li>Microneedling Services</li>
+                            <li>Peeling</li>
+                            <li>Whitening Services</li>
+                            <li>Cosmelan Peel</li>
+                            <li>3-in-1 Synergistic Treatment</li>
+                        </ul>
+                        <span class="read-more">Learn More →</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: Injections & Fillers -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&auto=format&fit=crop" alt="Injections & Fillers">
+                    <div class="service-body">
+                        <div class="service-icon"><i class="fas fa-syringe"></i></div>
+                        <h4>Injections & Fillers</h4>
+                        <ul class="service-list">
+                            <li>Injections</li>
+                            <li>Neurotoxins</li>
+                            <li>HA Fillers</li>
+                            <li>Biostimulators</li>
+                            <li>Mesotherapy Services</li>
+                            <li>Belotero Revive</li>
+                        </ul>
+                        <span class="read-more">Learn More →</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Advanced Procedures -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=600&auto=format&fit=crop" alt="Advanced Procedures">
+                    <div class="service-body">
+                        <div class="service-icon"><i class="fas fa-bolt"></i></div>
+                        <h4>Advanced Procedures</h4>
+                        <ul class="service-list">
+                            <li>Ultherapy Prime</li>
+                            <li>Hair Restoration</li>
+                            <li>Tattoo Removal</li>
+                            <li>Skin Lesions Removal</li>
+                            <li>Doctor's Procedures</li>
+                        </ul>
+                        <span class="read-more">Learn More →</span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Weight & Body Contouring -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&auto=format&fit=crop" alt="Weight & Body Contouring">
+                    <div class="service-body">
+                        <div class="service-icon"><i class="fas fa-weight-scale"></i></div>
+                        <h4>Weight & Body Contouring</h4>
+                        <ul class="service-list">
+                            <li>Weight Loss</li>
+                            <li>Slimming Services</li>
+                            <li>Contouring Services</li>
+                            <li>Mesolipo Services</li>
+                            <li>Slimshot / Tirzepatide</li>
+                        </ul>
+                        <span class="read-more">Learn More →</span>
+                    </div>
+                </div>
+
+                <!-- Card 5: Specialty & Wellness -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&auto=format&fit=crop" alt="Specialty & Wellness">
+                    <div class="service-body">
+                        <div class="service-icon"><i class="fas fa-heart"></i></div>
+                        <h4>Specialty & Wellness</h4>
+                        <ul class="service-list">
+                            <li>Doctor's Consultation</li>
+                            <li>Special Treatments</li>
+                            <li>Glutathione Services</li>
+                            <li>Enhance NAD+ Drip</li>
+                        </ul>
+                        <span class="read-more">Learn More →</span>
+                    </div>
+                </div>
+
+                <!-- Card 6: Hair & Beauty -->
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&auto=format&fit=crop" alt="Hair & Beauty">
+                    <div class="service-body">
+                        <div class="service-icon"><i class="fas fa-scissors"></i></div>
+                        <h4>Hair & Beauty</h4>
+                        <ul class="service-list">
+                            <li>Hair Removal Services</li>
+                            <li>Lash Services</li>
+                            <li>Nail Services</li>
+                            <li>Brow Lamination</li>
+                        </ul>
+                        <span class="read-more">Learn More →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== WHY CHOOSE ========== -->
+    <section style="background: white; padding: 60px 0;">
+        <div class="container section-animate" id="whyAnim">
+            <span class="section-tag">Why Choose Us</span>
+            <h2 class="font-playfair">Experience Radiant Skin</h2>
+            <div class="services-grid" style="margin-top:20px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+                <div class="service-card" style="border:1px solid #f2ece6; border-radius:var(--radius); padding:28px 18px; text-align:center; background:white; box-shadow:var(--shadow);">
+                    <i class="fas fa-shield-alt" style="font-size:2.2rem; color:var(--accent); margin-bottom:12px;"></i>
+                    <h4>Safe Procedures</h4>
+                    <p>All treatments follow the highest safety standards.</p>
+                </div>
+                <div class="service-card" style="border:1px solid #f2ece6; border-radius:var(--radius); padding:28px 18px; text-align:center; background:white; box-shadow:var(--shadow);">
+                    <i class="fas fa-star" style="font-size:2.2rem; color:var(--accent); margin-bottom:12px;"></i>
+                    <h4>Experienced Professionals</h4>
+                    <p>Our team is led by board-certified specialists.</p>
+                </div>
+                <div class="service-card" style="border:1px solid #f2ece6; border-radius:var(--radius); padding:28px 18px; text-align:center; background:white; box-shadow:var(--shadow);">
+                    <i class="fas fa-microchip" style="font-size:2.2rem; color:var(--accent); margin-bottom:12px;"></i>
+                    <h4>Latest Technology</h4>
+                    <p>We use modern equipment for optimal results.</p>
+                </div>
+                <div class="service-card" style="border:1px solid #f2ece6; border-radius:var(--radius); padding:28px 18px; text-align:center; background:white; box-shadow:var(--shadow);">
+                    <i class="fas fa-user-check" style="font-size:2.2rem; color:var(--accent); margin-bottom:12px;"></i>
+                    <h4>Personalized Beauty Plans</h4>
+                    <p>Customized treatments for your unique needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PROMO BANNER ========== -->
+    <section class="promo-banner">
+        <div class="container section-animate" id="promoAnim">
+            <h2 class="font-playfair">Feel Beautiful.</h2>
+            <p>Feel Confident. Feel Like the Best Version of Yourself.</p>
+            <a href="#" class="btn-primary" style="background: white; color: var(--primary);">Book Consultation</a>
+        </div>
+    </section>
+
+    <!-- ========== DOCTORS ========== -->
+    <section id="doctors" style="background: white;">
+        <div class="container section-animate" id="doctorsAnim">
+            <span class="section-tag">Our Team</span>
+            <h2 class="font-playfair">Meet Our Beauty Professionals</h2>
+            <div class="doctors-grid">
+                <div class="doctor-card"><img src="images/drjerome.png" alt="Doctor"><h4>Dr. Niño Jerome Joaquim Vanguardia</h4><p>Lifestyle Medicine · Occupational Medicine · Aesthetic Physician</p></div>
+                <div class="doctor-card"><img src="images/drize.png" alt="Doctor"><h4>Dr. Mary Partize L. Gonzales-Vanguardia</h4><p>Aesthetic Dermatology</p></div>
+                <div class="doctor-card"><img src="images/draleli.png" alt="Doctor"><h4>Dr. Aleli Abad</h4><p>Aesthetic Physician</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== STATS ========== -->
+    <section class="stats-section">
+        <div class="container section-animate" id="statsAnim">
+            <div class="stats-grid">
+                <div class="stat-item"><h3 class="counter" data-target="2500">0</h3><p>Satisfied Clients</p></div>
+                <div class="stat-item"><h3 class="counter" data-target="5">0</h3><p>Years of Experience</p></div>
+                <div class="stat-item"><h3 class="counter" data-target="98">0</h3><p>Client Satisfaction</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== GALLERY ========== -->
+    <section id="gallery">
+        <div class="container section-animate" id="galleryAnim">
+            <span class="section-tag">Gallery</span>
+            <h2 class="font-playfair">Experience the Beauty</h2>
+            <div class="gallery-grid">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&auto=format&fit=crop" alt="Clinic" class="tall">
+                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&auto=format&fit=crop" alt="Treatment">
+                <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&auto=format&fit=crop" alt="Interior" class="tall">
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&auto=format&fit=crop" alt="Doctor">
+                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=400&auto=format&fit=crop" alt="Team">
+                <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop" alt="Products">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRICING ========== -->
+    <section id="pricing" style="background: white;">
+        <div class="container section-animate" id="pricingAnim">
+            <span class="section-tag">Pricing</span>
+            <h2 class="font-playfair">Choose Your Treatment Plan</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card"><h4>Basic Facial</h4><div class="price">₱2,500</div><ul><li>✓ Deep cleansing</li><li>✓ Exfoliation</li><li>✓ Moisturizing</li></ul><a href="#" class="btn-primary" style="padding:0.5rem 2rem; font-size:0.8rem;">Book Now</a></div>
+                <div class="pricing-card featured"><h4>Premium Facial</h4><div class="price">₱5,500</div><ul><li>✓ All Basic features</li><li>✓ HydraFacial</li><li>✓ LED therapy</li></ul><a href="#" class="btn-primary" style="padding:0.5rem 2rem; font-size:0.8rem;">Book Now</a></div>
+                <div class="pricing-card"><h4>Complete Skin Care</h4><div class="price">₱9,900</div><ul><li>✓ Premium Facial</li><li>✓ Chemical Peel</li><li>✓ Microneedling</li></ul><a href="#" class="btn-primary" style="padding:0.5rem 2rem; font-size:0.8rem;">Book Now</a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section id="testimonials">
+        <div class="container section-animate" id="testimonialsAnim">
+            <span class="section-tag">Testimonials</span>
+            <h2 class="font-playfair">What Our Clients Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-item"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"The treatments I received were not only luxurious but also effective. My skin has never looked better!"</p><h5>— Julia D.</h5></div>
+                <div class="testimonial-item"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"ENHANCE CLINIC is my go-to for all my dermatology needs. Professional, caring, and results-driven."</p><h5>— George R.</h5></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FAQ ========== -->
+    <section id="faq" style="background: white;">
+        <div class="container section-animate" id="faqAnim">
+            <span class="section-tag">FAQ</span>
+            <h2 class="font-playfair">Frequently Asked Questions</h2>
+            <div style="max-width: 720px; margin-top: 20px;">
+                <div class="faq-item active"><div class="faq-question">What treatments do you offer? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">We offer a comprehensive range including facial services, injections, fillers, Ultherapy Prime, weight loss programs, hair restoration, and many more aesthetic treatments.</div></div>
+                <div class="faq-item"><div class="faq-question">Do I need an appointment? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Yes, we recommend booking in advance to secure your preferred time slot.</div></div>
+                <div class="faq-item"><div class="faq-question">How long does treatment take? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Most treatments last between 45 to 90 minutes, depending on the procedure.</div></div>
+                <div class="faq-item"><div class="faq-question">Is consultation available? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Yes, we offer a complimentary consultation for first-time clients.</div></div>
+                <div class="faq-item"><div class="faq-question">What should I expect after treatment? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Results vary by treatment. Our team will provide detailed aftercare instructions.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== BLOG ========== -->
+    <section id="blog">
+        <div class="container section-animate" id="blogAnim">
+            <span class="section-tag">Blog</span>
+            <h2 class="font-playfair">Skin Care Insights</h2>
+            <div class="blog-grid">
+                <div class="blog-card"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=400&auto=format&fit=crop" alt="Blog"><div class="blog-body"><h4>Unlocking Flawless Skin</h4><p>Expert tips from our beauty professionals.</p><span class="read-more">Read More →</span></div></div>
+                <div class="blog-card"><img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=400&auto=format&fit=crop" alt="Blog"><div class="blog-body"><h4>The Power of HydraFacial</h4><p>Why this treatment is a game-changer.</p><span class="read-more">Read More →</span></div></div>
+                <div class="blog-card"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&auto=format&fit=crop" alt="Blog"><div class="blog-body"><h4>Daily Skin Care Routine</h4><p>Simple steps for radiant skin every day.</p><span class="read-more">Read More →</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section id="contact" style="background: white;">
+        <div class="container section-animate" id="contactAnim">
+            <span class="section-tag">Contact</span>
+            <h2 class="font-playfair">Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p><i class="fas fa-location-dot"></i> Unit 22 Bridgepoint Bldg., 2nd Floor, Brgy. Anastacia, Sto. Tomas, Batangas</p>
+                    <p><i class="fas fa-map-pin"></i> Waze: Enhance by Doc Ize</p>
+                    <p><i class="fas fa-phone"></i> 0976-487-5779</p>
+                    <p><i class="far fa-calendar-alt"></i> Tuesday–Sunday · 10AM – 8PM</p>
+                    <p><i class="fas fa-envelope"></i> hello@enhanceclinic.com</p>
+                    <div style="margin-top: 20px; border-radius: 12px; overflow: hidden; height: 200px; background: #e0d6cc;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3868.247146957572!2d121.16113491483994!3d14.179326590294798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339bd7e4b7f6b1a1%3A0x8b9e8b7f1c8b7f1c!2sSto.%20Tomas%20Batangas!5e0!3m2!1sen!2sph!4v1650000000000" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div>
+                    <form class="contact-form">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
+                        <input type="tel" placeholder="Phone Number">
+                        <textarea rows="4" placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div><h4>ENHANCE CLINIC</h4><p style="opacity:0.7; max-width:260px;">Premium dermatology and facial aesthetics. Where science meets beauty.</p><div class="social" style="margin-top: 12px;"><a href="#"><i class="fab fa-facebook"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div></div>
+                <div><h4>Quick Links</h4><a href="#">Home</a><br><a href="#about">About</a><br><a href="#services">Services</a><br><a href="#gallery">Gallery</a></div>
+                <div><h4>Services</h4><a href="#">Facial</a><br><a href="#">Injections</a><br><a href="#">Ultherapy Prime</a><br><a href="#">Weight Loss</a><br><a href="#">Hair Restoration</a></div>
+                <div><h4>Contact</h4><p style="opacity:0.7;"><i class="fas fa-phone"></i> 0976-487-5779</p><p style="opacity:0.7;"><i class="far fa-clock"></i> Tues–Sun 10AM–8PM</p><p style="opacity:0.7;"><i class="fas fa-map-pin"></i> Sto. Tomas, Batangas</p></div>
+            </div>
+            <div class="footer-bottom">© 2026 ENHANCE CLINIC. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // ---------- STICKY NAV ----------
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 40) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
+
+        // ---------- HAMBURGER ----------
+        document.getElementById('hamburger').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('open');
+        });
+
+        // ---------- FAQ ACCORDION ----------
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', function() {
+                const active = document.querySelector('.faq-item.active');
+                if (active && active !== item) active.classList.remove('active');
+                item.classList.toggle('active');
+            });
+        });
+
+        // ---------- COUNTER ANIMATION ----------
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-target'));
+                    let count = 0;
+                    const inc = Math.ceil(target / 30);
+                    const timer = setInterval(() => {
+                        count += inc;
+                        if (count >= target) { el.textContent = target;
+                            clearInterval(timer); } else el.textContent = count;
+                    }, 30);
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(c => observer.observe(c));
+
+        // ---------- SECTION ANIMATIONS (Intersection Observer) ----------
+        const animatedSections = document.querySelectorAll('.section-animate');
+
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        animatedSections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // ---------- SMOOTH SCROLL ----------
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        console.log('✨ ENHANCE CLINIC · luxury beauty experience');
+    </script>
+
+</body>
+</html>
