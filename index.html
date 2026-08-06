@@ -429,6 +429,75 @@
             padding: 80px 0;
         }
 
+        /* ---------- WHAT'S NEW ---------- */
+        .whatsnew-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .whatsnew-card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 32px 36px;
+            border: 1px solid #f2ece6;
+            transition: var(--transition);
+        }
+        .whatsnew-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(106, 67, 40, 0.08);
+        }
+
+        .whatsnew-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .whatsnew-card .highlight-text {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #3d2a20;
+            line-height: 1.8;
+        }
+
+        .whatsnew-card .highlight-text strong {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .whatsnew-card .highlight-text .emoji-big {
+            font-size: 1.6rem;
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .whatsnew-video-wrapper {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: #f0e8e0;
+            aspect-ratio: 9 / 16;
+            max-height: 520px;
+            width: 100%;
+        }
+
+        .whatsnew-video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+        }
+
         /* ---------- ABOUT ---------- */
         .about-grid {
             display: grid;
@@ -1130,6 +1199,13 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 14px 20px;
             }
+            .whatsnew-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .whatsnew-video-wrapper {
+                max-height: 400px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1212,6 +1288,19 @@
             }
             .footer .footer-logo {
                 max-width: 140px;
+            }
+            .whatsnew-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .whatsnew-card {
+                padding: 24px 20px;
+            }
+            .whatsnew-card h3 {
+                font-size: 1.6rem;
+            }
+            .whatsnew-video-wrapper {
+                max-height: 350px;
             }
         }
 
@@ -1314,6 +1403,12 @@
             .footer .footer-logo {
                 max-width: 120px;
             }
+            .whatsnew-card h3 {
+                font-size: 1.4rem;
+            }
+            .whatsnew-video-wrapper {
+                max-height: 280px;
+            }
         }
     </style>
 </head>
@@ -1391,6 +1486,8 @@
         </div>
     </section>
 
+  
+
     <!-- ========== ABOUT ========== -->
     <section id="about" style="background: white;">
         <div class="container section-animate" id="aboutAnim">
@@ -1409,6 +1506,39 @@
                         <div class="about-feature"><i class="fas fa-microscope"></i> Modern Equipment</div>
                         <div class="about-feature"><i class="fas fa-leaf"></i> Comfortable Environment</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+	  <!-- ========== WHAT'S NEW ========== -->
+    <section id="whatsnew" style="background: white;">
+        <div class="container section-animate" id="whatsnewAnim">
+            <span class="section-tag">What's New</span>
+            <h2 class="font-playfair">Latest Arrival</h2>
+            <p class="section-sub">Experience the future of skin rejuvenation with our newest technology.</p>
+
+            <div class="whatsnew-grid">
+                <!-- Description Card -->
+                <div class="whatsnew-card">
+                    <h3>✨ Mosaic 3D Laser</h3>
+                    <div class="highlight-text">
+                        <p>
+                            <span class="emoji-big">🎉</span><strong>The wait is over!</strong> 
+                            <strong>Mosaic 3D Laser</strong> has officially arrived at <strong>Enhance Clinic</strong>. ✨
+                        </p>
+                        <p style="margin-top: 14px;">
+                            Ready to transform your skin? Say goodbye to acne scars, rough texture, enlarged pores, and dull skin with our newest advanced laser technology.
+                        </p>
+                        <p style="margin-top: 14px; font-weight: 400;">
+                            Experience smoother, clearer, and more radiant skin, because your glow deserves the latest innovation.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Instagram Reel Embed -->
+                <div class="whatsnew-video-wrapper">
+                    <iframe src="https://www.instagram.com/reel/DbpCkJRBaCE/embed" allowfullscreen loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -2129,6 +2259,5 @@
 
         console.log('✨ ENHANCE CLINIC · premium aesthetic care');
     </script>
-
 </body>
 </html>
