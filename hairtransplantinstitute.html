@@ -338,6 +338,7 @@
         .hero-content .hero-logo {
             max-width: 200px;
             margin-bottom: 1.8rem;
+			   filter: brightness(0) invert(1);
         }
 
         .hero-content .badge {
@@ -1080,9 +1081,9 @@
         <div class="container">
             <div class="hero-content section-animate visible">
                 <img src="hair/logo-1.png" alt="ENHANCE CLINIC" class="hero-logo" onerror="this.style.display='none'">
-                <div class="badge"> Hair Transplant Institute</div>
-                <h1 class="font-serif">Restore Your Hair,<br>Renew Your Confidence</h1>
-                <p>Dr. Niño Jerome Joaquim Vanguardia combines precision, artistry, and advanced techniques to help you achieve natural, lasting results.</p>
+				  <div class="badge"> Hair Transplant Institute</div>
+            <h1 class="font-serif">First DHI Micrograft <br>Hair Transplant in South Luzon</h1>
+    <p>Dr. Niño Jerome Joaquim Vanguardia is a DHI specialist who combines precision, artistry, and advanced techniques to help you achieve natural, lasting results.</p>
                 <div class="hero-btns">
                     <a href="https://www.facebook.com/profile.php?id=61572015235058" class="btn-primary">Book Consultation</a>
                     <a href="#about" class="btn-outline-light">Learn More</a>
@@ -1123,14 +1124,17 @@
                 </div>
                 <div>
                     <span class="section-tag">About</span>
-                    <h2 class="font-serif">Meet Dr. Niño Jerome Joaquim Vanguardia</h2>
-                    <p style="color: var(--text-muted); margin: 16px 0; font-family: 'Space Grotesk', sans-serif;">Dr. Niño Jerome Joaquim Vanguardia is a board-certified Hair Transplant Surgeon with a passion for restoring confidence through natural-looking results. With years of specialized training and experience, he combines the latest surgical techniques with an artistic eye to create hairlines that look completely natural.</p>
-                    <p style="color: var(--text-muted); margin: 16px 0; font-family: 'Space Grotesk', sans-serif;">His approach is patient-centered, ensuring every individual receives a customized treatment plan tailored to their unique hair loss pattern, goals, and lifestyle.</p>
-                    <div class="about-features">
-                        <div class="about-feature"><i class="fas fa-user-md"></i> Hair Transplant Surgeon</div>
-                        <div class="about-feature"><i class="fas fa-microscope"></i> FUE & FUT Specialist</div>
-                        <div class="about-feature"><i class="fas fa-hand-holding-heart"></i> Personalized Care</div>
-                        <div class="about-feature"><i class="fas fa-leaf"></i> Natural Results</div>
+                  <h2 class="font-serif">Meet Dr. Niño Jerome Joaquim Vanguardia</h2>
+<p style="color: var(--text-muted); margin: 16px 0; font-family: 'Space Grotesk', sans-serif;">Dr. Jerome is a DHI Specialist, Hair Transplant Surgeon, and Aesthetic Physician. He is Internationally Trained in Thailand under the ISAAH (International Society of Aesthetics, Aging Control Medicine &amp; Hair Transplantation), mastering the latest techniques in hair restoration.</p>
+<p style="color: var(--text-muted); margin: 16px 0; font-family: 'Space Grotesk', sans-serif;">With a passion for natural-looking results, he combines surgical precision with an artistic eye, ensuring each patient receives a customized treatment plan tailored to their unique needs.</p>
+<div class="about-features">
+    <div class="about-feature"><i class="fas fa-user-md"></i> DHI Specialist</div>
+    <div class="about-feature"><i class="fas fa-microscope"></i> Hair Transplant Surgeon</div>
+    <div class="about-feature"><i class="fas fa-stethoscope"></i> Aesthetic Physician</div>
+    <div class="about-feature"><i class="fas fa-globe-asia"></i> Internationally Trained</div>
+    <div class="about-feature"><i class="fas fa-hand-holding-heart"></i> Personalized Care</div>
+    <div class="about-feature"><i class="fas fa-leaf"></i> Natural Results</div>
+</div>
                     </div>
                 </div>
             </div>
@@ -1406,196 +1410,216 @@
     </footer>
 
     <script>
-        // ---------- STICKY NAV ----------
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 40) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-        });
+// ---------- STICKY NAV ----------
+window.addEventListener('scroll', function() {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+});
 
-        // ---------- MOBILE MENU ----------
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
+// ---------- MOBILE MENU ----------
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-        hamburger.addEventListener('click', function() {
-            mobileMenu.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        });
+// Debug: log elements to verify they exist
+console.log('hamburger:', hamburger);
+console.log('mobileMenu:', mobileMenu);
+console.log('mobileMenuClose:', mobileMenuClose);
 
-        mobileMenuClose.addEventListener('click', function() {
+if (hamburger) {
+    hamburger.addEventListener('click', function() {
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+}
+
+if (mobileMenuClose) {
+    mobileMenuClose.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    });
+}
+
+// Also close when clicking on the overlay background (outside the links)
+if (mobileMenu) {
+    mobileMenu.addEventListener('click', function(e) {
+        // Close if the click is directly on the overlay, not on a child element
+        if (e.target === mobileMenu) {
             mobileMenu.classList.remove('open');
             document.body.style.overflow = '';
-        });
-
-        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // ---------- SECTION ANIMATIONS ----------
-        const animatedSections = document.querySelectorAll('.section-animate, .stagger-children');
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.08,
-            rootMargin: '0px 0px -30px 0px'
-        });
-        animatedSections.forEach(section => {
-            sectionObserver.observe(section);
-        });
-
-        // ---------- IMAGE LIGHTBOX ----------
-        const imageLightbox = document.getElementById('imageLightbox');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const imageLightboxClose = document.getElementById('imageLightboxClose');
-
-        document.querySelectorAll('.solution-card img, .gallery-card img, .ba-card img').forEach(img => {
-            img.addEventListener('click', function(e) {
-                e.stopPropagation();
-                lightboxImage.src = this.src;
-                lightboxImage.alt = this.alt || 'Full screen image';
-                imageLightbox.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        imageLightboxClose.addEventListener('click', function() {
-            imageLightbox.classList.remove('open');
-            document.body.style.overflow = '';
-        });
-
-        imageLightbox.addEventListener('click', function(e) {
-            if (e.target === imageLightbox) {
-                imageLightbox.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && imageLightbox.classList.contains('open')) {
-                imageLightbox.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // ---------- VIDEO CONTROLS (Play/Pause, Mute/Unmute, One at a time) ----------
-        const allVideos = document.querySelectorAll('video');
-        const videoWrappers = document.querySelectorAll('.video-wrapper');
-
-        let currentlyPlaying = null;
-
-        function pauseAllOtherVideos(videoId) {
-            allVideos.forEach(v => {
-                if (v.id !== videoId && !v.paused) {
-                    v.pause();
-                    const wrapper = v.closest('.video-wrapper');
-                    if (wrapper) {
-                        const overlay = wrapper.querySelector('.video-play-overlay');
-                        if (overlay) overlay.classList.add('visible');
-                        const playBtn = wrapper.querySelector('.play-btn');
-                        if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    }
-                }
-            });
         }
+    });
+}
 
-        videoWrappers.forEach(wrapper => {
-            const video = wrapper.querySelector('video');
-            if (!video) return;
+document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', function() {
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    });
+});
 
-            const playBtn = wrapper.querySelector('.play-btn');
-            const muteBtn = wrapper.querySelector('.mute-btn');
-            const overlay = wrapper.querySelector('.video-play-overlay');
+// ---------- SECTION ANIMATIONS ----------
+const animatedSections = document.querySelectorAll('.section-animate, .stagger-children');
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -30px 0px'
+});
+animatedSections.forEach(section => {
+    sectionObserver.observe(section);
+});
 
-            if (playBtn) {
-                playBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (video.paused) {
-                        pauseAllOtherVideos(video.id);
-                        video.play();
-                        this.innerHTML = '<i class="fas fa-pause"></i>';
-                        if (overlay) overlay.classList.remove('visible');
-                        currentlyPlaying = video.id;
-                    } else {
-                        video.pause();
-                        this.innerHTML = '<i class="fas fa-play"></i>';
-                        if (overlay) overlay.classList.add('visible');
-                    }
-                });
-            }
+// ---------- IMAGE LIGHTBOX ----------
+const imageLightbox = document.getElementById('imageLightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const imageLightboxClose = document.getElementById('imageLightboxClose');
 
-            if (muteBtn) {
-                muteBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    video.muted = !video.muted;
-                    this.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
-                });
-            }
+document.querySelectorAll('.solution-card img, .gallery-card img, .ba-card img').forEach(img => {
+    img.addEventListener('click', function(e) {
+        e.stopPropagation();
+        lightboxImage.src = this.src;
+        lightboxImage.alt = this.alt || 'Full screen image';
+        imageLightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    });
+});
 
-            wrapper.addEventListener('click', function(e) {
-                if (e.target.closest('.video-controls')) return;
+imageLightboxClose.addEventListener('click', function() {
+    imageLightbox.classList.remove('open');
+    document.body.style.overflow = '';
+});
 
-                if (video.paused) {
-                    pauseAllOtherVideos(video.id);
-                    video.play();
-                    if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-                    if (overlay) overlay.classList.remove('visible');
-                    currentlyPlaying = video.id;
-                } else {
-                    video.pause();
-                    if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
-                    if (overlay) overlay.classList.add('visible');
-                }
-            });
+imageLightbox.addEventListener('click', function(e) {
+    if (e.target === imageLightbox) {
+        imageLightbox.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+});
 
-            video.addEventListener('play', function() {
-                if (overlay) overlay.classList.remove('visible');
-                if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            });
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && imageLightbox.classList.contains('open')) {
+        imageLightbox.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+});
 
-            video.addEventListener('pause', function() {
+// ---------- VIDEO CONTROLS (Play/Pause, Mute/Unmute, One at a time) ----------
+const allVideos = document.querySelectorAll('video');
+const videoWrappers = document.querySelectorAll('.video-wrapper');
+
+let currentlyPlaying = null;
+
+function pauseAllOtherVideos(videoId) {
+    allVideos.forEach(v => {
+        if (v.id !== videoId && !v.paused) {
+            v.pause();
+            const wrapper = v.closest('.video-wrapper');
+            if (wrapper) {
+                const overlay = wrapper.querySelector('.video-play-overlay');
                 if (overlay) overlay.classList.add('visible');
+                const playBtn = wrapper.querySelector('.play-btn');
                 if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            });
-
-            if (muteBtn) {
-                muteBtn.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
             }
+        }
+    });
+}
 
-            if (video.paused && overlay) {
-                overlay.classList.add('visible');
+videoWrappers.forEach(wrapper => {
+    const video = wrapper.querySelector('video');
+    if (!video) return;
+
+    const playBtn = wrapper.querySelector('.play-btn');
+    const muteBtn = wrapper.querySelector('.mute-btn');
+    const overlay = wrapper.querySelector('.video-play-overlay');
+
+    if (playBtn) {
+        playBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (video.paused) {
+                pauseAllOtherVideos(video.id);
+                video.play();
+                this.innerHTML = '<i class="fas fa-pause"></i>';
+                if (overlay) overlay.classList.remove('visible');
+                currentlyPlaying = video.id;
+            } else {
+                video.pause();
+                this.innerHTML = '<i class="fas fa-play"></i>';
+                if (overlay) overlay.classList.add('visible');
             }
         });
+    }
 
-        // ---------- FAQ ACCORDION ----------
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.querySelector('.faq-question').addEventListener('click', function() {
-                document.querySelectorAll('.faq-item').forEach(other => {
-                    if (other !== item) other.classList.remove('active');
-                });
-                item.classList.toggle('active');
-            });
+    if (muteBtn) {
+        muteBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            video.muted = !video.muted;
+            this.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
         });
+    }
 
-        // ---------- SMOOTH SCROLL ----------
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
+    wrapper.addEventListener('click', function(e) {
+        if (e.target.closest('.video-controls')) return;
+
+        if (video.paused) {
+            pauseAllOtherVideos(video.id);
+            video.play();
+            if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            if (overlay) overlay.classList.remove('visible');
+            currentlyPlaying = video.id;
+        } else {
+            video.pause();
+            if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            if (overlay) overlay.classList.add('visible');
+        }
+    });
+
+    video.addEventListener('play', function() {
+        if (overlay) overlay.classList.remove('visible');
+        if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    });
+
+    video.addEventListener('pause', function() {
+        if (overlay) overlay.classList.add('visible');
+        if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    });
+
+    if (muteBtn) {
+        muteBtn.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+    }
+
+    if (video.paused && overlay) {
+        overlay.classList.add('visible');
+    }
+});
+
+// ---------- FAQ ACCORDION ----------
+document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-question').addEventListener('click', function() {
+        document.querySelectorAll('.faq-item').forEach(other => {
+            if (other !== item) other.classList.remove('active');
         });
+        item.classList.toggle('active');
+    });
+});
 
-        console.log('✨ ENHANCE CLINIC · Hair Transplant Institute');
+// ---------- SMOOTH SCROLL ----------
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+console.log('✨ ENHANCE CLINIC · Hair Transplant Institute');
     </script>
 
 </body>
