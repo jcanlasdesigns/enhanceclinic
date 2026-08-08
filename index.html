@@ -1,2263 +1,1792 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>ENHANCE CLINIC · premium aesthetics</title>
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <style>
-        /* ---------- CSS VARIABLES ---------- */
-        :root {
-            --primary: #6A4328;
-            --secondary: #F7F3EE;
-            --accent: #C8A56A;
-            --text-dark: #3A2A22;
-            --white: #FFFFFF;
-            --shadow: 0 12px 32px rgba(106, 67, 40, 0.06);
-            --radius: 20px;
-            --transition: 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--secondary);
-            color: var(--text-dark);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 30px;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ---------- TYPOGRAPHY ---------- */
-        .font-playfair {
-            font-family: 'Playfair Display', serif;
-        }
-
-        h1,
-        h2,
-        h3,
-        .heading {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-        }
-
-        h1 {
-            font-size: 3.8rem;
-            line-height: 1.1;
-        }
-        h2 {
-            font-size: 2.6rem;
-            margin-bottom: 0.5rem;
-        }
-        h3 {
-            font-size: 1.6rem;
-        }
-
-        .section-tag {
-            display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 0.4rem;
-            border-left: 3px solid var(--accent);
-            padding-left: 12px;
-        }
-
-        .section-sub {
-            color: #7a6a5e;
-            max-width: 540px;
-            margin-top: 8px;
-            font-weight: 300;
-        }
-
-        /* ---------- BUTTONS ---------- */
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem 2.8rem;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-            border-radius: 50px;
-            transition: var(--transition);
-            cursor: pointer;
-            display: inline-block;
-            box-shadow: 0 8px 20px rgba(106, 67, 40, 0.15);
-            font-family: 'Poppins', sans-serif;
-        }
-        .btn-primary:hover {
-            background: #7f5539;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(106, 67, 40, 0.2);
-        }
-
-        .btn-circle {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: white;
-            color: var(--primary);
-            border: none;
-            font-size: 1.4rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            cursor: pointer;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            animation: bounceDown 2s infinite;
-        }
-        .btn-circle:hover {
-            transform: scale(1.08);
-            background: var(--primary);
-            color: white;
-        }
-
-        @keyframes bounceDown {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(8px);
-            }
-        }
-
-        /* ---------- STICKY NAV ---------- */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 999;
-            padding: 22px 0;
-            transition: 0.4s ease;
-            background: transparent;
-        }
-        .navbar.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-            padding: 16px 0;
-        }
-        .navbar .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-            font-weight: 500;
-            font-size: 1rem;
-        }
-        .nav-links a {
-            transition: 0.2s;
-            color: white;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-            letter-spacing: 0.3px;
-        }
-        .navbar.scrolled .nav-links a {
-            color: var(--text-dark);
-            text-shadow: none;
-        }
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .hamburger {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: white;
-            z-index: 1000;
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-        .navbar.scrolled .hamburger {
-            color: var(--text-dark);
-        }
-
-        /* ---------- MOBILE MENU (FULL SCREEN, WHITE BACKGROUND, BROWN TEXT) ---------- */
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: white;
-            z-index: 998;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 40px 20px;
-        }
-        .mobile-menu-overlay.open {
-            display: flex;
-        }
-        .mobile-menu-overlay .mobile-nav-links {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2.2rem;
-        }
-        .mobile-menu-overlay .mobile-nav-links a {
-            color: var(--text-dark);
-            font-size: 1.8rem;
-            font-weight: 500;
-            transition: 0.2s;
-            letter-spacing: 1px;
-            font-family: 'Poppins', sans-serif;
-        }
-        .mobile-menu-overlay .mobile-nav-links a:hover {
-            color: var(--accent);
-            transform: scale(1.05);
-        }
-        .mobile-menu-close {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            color: var(--text-dark);
-            font-size: 2.2rem;
-            cursor: pointer;
-            transition: 0.2s;
-            z-index: 999;
-        }
-        .mobile-menu-close:hover {
-            transform: rotate(90deg);
-            color: var(--accent);
-        }
-
-        /* ---------- FLOATING SOCIAL ICONS + PRICELIST ---------- */
-        .floating-social {
-            position: fixed;
-            right: 20px;
-            bottom: 120px;
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            align-items: center;
-        }
-        .floating-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            font-size: 1.3rem;
-            transition: var(--transition);
-            box-shadow: 0 4px 16px rgba(106, 67, 40, 0.25);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-        .floating-social a:hover {
-            transform: scale(1.12) translateX(-3px);
-            background: var(--accent);
-            color: white;
-        }
-        .floating-social a.messenger {
-            background: #0084ff;
-        }
-        .floating-social a.instagram {
-            background: #E4405F;
-        }
-        .floating-social a.facebook {
-            background: #1877F2;
-        }
-        .floating-social a.pricelist {
-            background: var(--accent);
-            box-shadow: 0 4px 16px rgba(201, 165, 107, 0.3);
-        }
-        .floating-social a.pricelist:hover {
-            background: var(--primary);
-        }
-        .floating-social .pricelist-label {
-            font-size: 0.55rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            color: var(--primary);
-            background: white;
-            padding: 2px 8px;
-            border-radius: 20px;
-            margin-top: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            white-space: nowrap;
-        }
-
-        /* ---------- HERO (FULL SCREEN VIDEO) ---------- */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            min-height: 600px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #2a1f1a;
-        }
-
-        .hero-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 0;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(42, 31, 26, 0.5), rgba(106, 67, 40, 0.3));
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            max-width: 800px;
-            padding: 0 20px;
-        }
-
-        .hero-content .hero-logo {
-            max-width: 420px;
-            width: 100%;
-            margin: 0 auto 1.5rem;
-            filter: drop-shadow(0 4px 30px rgba(0, 0, 0, 0.2));
-        }
-
-        .hero-content .badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            color: white;
-            padding: 0.3rem 1.6rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            margin-bottom: 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-content p {
-            font-size: 1.15rem;
-            max-width: 520px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-            font-weight: 300;
-            color: white;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .hero-scroll-down {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
-        }
-
-        /* ---------- SECTION TRANSITIONS (fade-up) ---------- */
-        .section-animate {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1),
-                transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
-        }
-
-        .section-animate.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ---------- SECTION BASE ---------- */
-        section {
-            padding: 80px 0;
-        }
-
-        /* ---------- WHAT'S NEW ---------- */
-        .whatsnew-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            margin-top: 30px;
-        }
-
-        .whatsnew-card {
-            background: white;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 32px 36px;
-            border: 1px solid #f2ece6;
-            transition: var(--transition);
-        }
-        .whatsnew-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 24px 48px rgba(106, 67, 40, 0.08);
-        }
-
-        .whatsnew-card h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--primary);
-            font-size: 1.8rem;
-            margin-bottom: 12px;
-            letter-spacing: -0.01em;
-        }
-
-        .whatsnew-card .highlight-text {
-            font-size: 1.1rem;
-            font-weight: 400;
-            color: #3d2a20;
-            line-height: 1.8;
-        }
-
-        .whatsnew-card .highlight-text strong {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .whatsnew-card .highlight-text .emoji-big {
-            font-size: 1.6rem;
-            display: inline-block;
-            margin-right: 4px;
-        }
-
-        .whatsnew-video-wrapper {
-            position: relative;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            background: #f0e8e0;
-            aspect-ratio: 9 / 16;
-            max-height: 520px;
-            width: 100%;
-        }
-
-        .whatsnew-video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: transparent;
-        }
-
-        /* ---------- ABOUT ---------- */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        .about-image {
-            position: relative;
-        }
-        .about-image img {
-            width: 100%;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-        .about-image .floating-img {
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            width: 40%;
-            border-radius: var(--radius);
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.08);
-        }
-        .about-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-            margin-top: 24px;
-        }
-        .about-feature {
-            background: white;
-            padding: 16px 18px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-            border: 1px solid #f0e8e0;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-        .about-feature i {
-            color: var(--accent);
-            font-size: 1.2rem;
-        }
-
-        /* ---------- SERVICES (6 CARDS - SHORT PARAGRAPH DESCRIPTION) ---------- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
-            margin-top: 30px;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid #f2ece6;
-        }
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 24px 48px rgba(106, 67, 40, 0.1);
-        }
-        .service-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-        }
-        .service-card .service-body {
-            padding: 24px 26px 28px;
-            text-align: center;
-        }
-        .service-card .service-body h4 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-            color: var(--primary);
-        }
-        .service-card .service-body p {
-            font-size: 0.85rem;
-            color: #5f4c3d;
-            line-height: 1.7;
-            text-align: left;
-        }
-        .service-card .read-more {
-            display: inline-block;
-            margin-top: 14px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            color: var(--primary);
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid transparent;
-            transition: 0.2s;
-        }
-        .service-card .read-more:hover {
-            border-bottom-color: var(--primary);
-        }
-
-        /* ---------- PROMO BANNER ---------- */
-        .promo-banner {
-            background: linear-gradient(135deg, rgba(106, 67, 40, 0.92), rgba(61, 42, 32, 0.88)), url('images/about-1.png') center/cover fixed;
-            padding: 100px 0;
-            text-align: center;
-            color: white;
-        }
-        .promo-banner h2 {
-            font-size: 3.2rem;
-            margin-bottom: 0.6rem;
-        }
-        .promo-banner p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-bottom: 2rem;
-        }
-
-        /* ---------- DOCTORS ---------- */
-        .doctors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-        .doctor-card {
-            text-align: center;
-            transition: var(--transition);
-        }
-        .doctor-card:hover {
-            transform: translateY(-4px);
-        }
-        .doctor-card img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-            border: 3px solid white;
-        }
-        .doctor-card h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-        }
-        .doctor-card p {
-            font-size: 0.8rem;
-            color: #6a5a4e;
-        }
-
-        /* ---------- INSTAGRAM REELS (3x2 GRID) ---------- */
-        .reels-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 30px;
-        }
-
-        .reel-card {
-            background: white;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid #f2ece6;
-            transition: var(--transition);
-        }
-        .reel-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(106, 67, 40, 0.08);
-        }
-
-        .reel-card .video-wrapper {
-            position: relative;
-            padding-bottom: 100%;
-            background: transparent;
-            overflow: hidden;
-        }
-
-        .reel-card .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            background: transparent;
-        }
-
-        .reel-card .reel-info {
-            padding: 14px 16px 16px;
-        }
-
-        .reel-card .reel-info h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            color: var(--primary);
-            margin-bottom: 3px;
-        }
-
-        .reel-card .reel-info p {
-            font-size: 0.78rem;
-            color: #6a5a4e;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.5;
-        }
-
-        .reel-card .reel-info .reel-link {
-            display: inline-block;
-            margin-top: 8px;
-            font-weight: 500;
-            font-size: 0.7rem;
-            color: var(--accent);
-            letter-spacing: 0.5px;
-            transition: 0.2s;
-        }
-        .reel-card .reel-info .reel-link:hover {
-            color: var(--primary);
-        }
-
-        /* ---------- BEFORE & AFTER GALLERY (2x4 GRID - INSIDE REELS SECTION) ---------- */
-        .ba-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .ba-card {
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border: 1px solid #f2ece6;
-            background: white;
-            aspect-ratio: 1 / 1;
-        }
-        .ba-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(106, 67, 40, 0.1);
-        }
-        .ba-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            cursor: pointer;
-        }
-
-        /* ---------- WHY CHOOSE US (3 IMAGE CARDS - NOT CLICKABLE) ---------- */
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .why-card {
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid #f2ece6;
-            background: white;
-            pointer-events: none;
-        }
-        .why-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* ---------- LIGHTBOX (FULL SCREEN IMAGE) ---------- */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            cursor: pointer;
-        }
-        .lightbox.open {
-            display: flex;
-        }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 85vh;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            cursor: default;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            color: white;
-            font-size: 2.8rem;
-            cursor: pointer;
-            transition: 0.3s;
-            background: none;
-            border: none;
-            z-index: 10000;
-        }
-        .lightbox-close:hover {
-            transform: rotate(90deg);
-            color: var(--accent);
-        }
-
-        /* ---------- BRANDS MARQUEE (INFINITE LOOP) ---------- */
-        .brands-marquee {
-            background: white;
-            padding: 30px 0;
-            border-top: 1px solid #f0e8e0;
-            border-bottom: 1px solid #f0e8e0;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .marquee-wrapper {
-            display: flex;
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-        }
-
-        .marquee-track {
-            display: flex;
-            animation: scrollMarquee 20s linear infinite;
-            width: max-content;
-            will-change: transform;
-        }
-
-        .marquee-track:hover {
-            animation-play-state: paused;
-        }
-
-        .marquee-item {
-            flex: 0 0 160px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-        }
-
-        .marquee-item img {
-            max-height: 70px;
-            width: auto;
-            object-fit: contain;
-            transition: 0.3s;
-        }
-
-        .marquee-item img:hover {
-            transform: scale(1.05);
-        }
-
-        @keyframes scrollMarquee {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* ---------- TESTIMONIALS CAROUSEL ---------- */
-        .testimonial-carousel {
-            position: relative;
-            overflow: hidden;
-            margin-top: 30px;
-        }
-
-        .testimonial-track {
-            display: flex;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            will-change: transform;
-        }
-
-        .testimonial-slide {
-            flex: 0 0 100%;
-            padding: 0 10px;
-        }
-
-        .testimonial-item {
-            background: white;
-            padding: 28px 30px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            border: 1px solid #f2ece6;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .testimonial-item .stars {
-            color: var(--accent);
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-        }
-        .testimonial-item p {
-            font-style: italic;
-            color: #3d2a20;
-            font-size: 0.9rem;
-            line-height: 1.7;
-        }
-        .testimonial-item h5 {
-            margin-top: 14px;
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 0.95rem;
-        }
-
-        .carousel-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 24px;
-        }
-
-        .carousel-btn {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid #e0d6cc;
-            background: white;
-            color: var(--primary);
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .carousel-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: scale(1.05);
-        }
-
-        .carousel-dots {
-            display: flex;
-            gap: 8px;
-        }
-
-        .carousel-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #d4c9c0;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            padding: 0;
-        }
-        .carousel-dot.active {
-            background: var(--primary);
-            transform: scale(1.2);
-        }
-
-        /* ---------- FAQ (2-COLUMN GRID) ---------- */
-        .faq-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px 24px;
-            margin-top: 20px;
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-            border: 1px solid #f0e8e0;
-            overflow: hidden;
-        }
-        .faq-item.active .faq-answer {
-            display: block;
-        }
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        .faq-question {
-            padding: 14px 18px;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;
-            gap: 10px;
-        }
-        .faq-question i {
-            transition: 0.3s;
-            color: var(--accent);
-            flex-shrink: 0;
-        }
-
-        .faq-answer {
-            padding: 0 18px 16px;
-            color: #5f4c3d;
-            display: none;
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.8rem;
-        }
-
-        .faq-answer p {
-            margin-bottom: 4px;
-        }
-
-        .faq-answer .watch-video-btn {
-            display: inline-block;
-            margin-top: 8px;
-            padding: 6px 18px;
-            background: var(--primary);
-            color: white;
-            border-radius: 40px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            font-family: 'Poppins', sans-serif;
-        }
-        .faq-answer .watch-video-btn:hover {
-            background: #7f5539;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(106, 67, 40, 0.15);
-        }
-
-        /* ---------- VIDEO LIGHTBOX (FULL SIZE) ---------- */
-        .video-lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            z-index: 9998;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .video-lightbox.open {
-            display: flex;
-        }
-
-        .video-lightbox-content {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            background: transparent;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .video-lightbox-content .video-wrapper {
-            position: relative;
-            padding-bottom: 100%;
-            background: #000;
-        }
-
-        .video-lightbox-content .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .video-lightbox-close {
-            position: absolute;
-            top: -48px;
-            right: 0;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            transition: 0.3s;
-            background: none;
-            border: none;
-            z-index: 10;
-        }
-        .video-lightbox-close:hover {
-            transform: rotate(90deg);
-            color: var(--accent);
-        }
-
-        /* ---------- CONTACT ---------- */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        .contact-info p {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .contact-info i {
-            width: 24px;
-            color: var(--accent);
-        }
-        .contact-image {
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        .contact-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* ---------- FOOTER ---------- */
-        .footer {
-            background: var(--primary);
-            color: #f0e8e0;
-            padding: 50px 0 20px;
-        }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 30px;
-        }
-        .footer h4 {
-            color: white;
-            margin-bottom: 12px;
-            font-family: 'Playfair Display', serif;
-        }
-        .footer a {
-            color: #d4c5b8;
-            transition: 0.2s;
-            display: inline-block;
-            margin-bottom: 4px;
-        }
-        .footer a:hover {
-            color: white;
-        }
-        .footer .social a {
-            margin-right: 14px;
-            font-size: 1.2rem;
-        }
-        .footer .footer-logo {
-            max-width: 180px;
-            height: auto;
-            margin-bottom: 12px;
-            filter: brightness(0) invert(1);
-        }
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 20px;
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 1024px) {
-            h1 {
-                font-size: 2.8rem;
-            }
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .hero-content .hero-logo {
-                max-width: 320px;
-            }
-            .reels-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .ba-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .why-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
-            }
-            .faq-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 14px 20px;
-            }
-            .whatsnew-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            .whatsnew-video-wrapper {
-                max-height: 400px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .hamburger {
-                display: block;
-            }
-            .navbar .container {
-                flex-wrap: wrap;
-                justify-content: center;
-                padding: 0 16px;
-                position: relative;
-            }
-            .navbar {
-                padding: 18px 0;
-            }
-            .navbar.scrolled {
-                padding: 14px 0;
-            }
-            .hero-content .hero-logo {
-                max-width: 260px;
-            }
-            .about-features {
-                grid-template-columns: 1fr;
-            }
-            .doctors-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .services-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .floating-social {
-                right: 12px;
-                bottom: 100px;
-            }
-            .floating-social a {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            .reels-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 16px;
-            }
-            .ba-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            .why-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 15px;
-            }
-            .marquee-item {
-                flex: 0 0 120px;
-                padding: 0 12px;
-            }
-            .marquee-item img {
-                max-height: 50px;
-            }
-            .faq-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-            .video-lightbox-content {
-                max-width: 100%;
-            }
-            .lightbox-close {
-                font-size: 2rem;
-                top: 20px;
-                right: 20px;
-            }
-            .lightbox img {
-                max-width: 95%;
-                max-height: 75vh;
-            }
-            .testimonial-item {
-                padding: 20px;
-            }
-            .footer .footer-logo {
-                max-width: 140px;
-            }
-            .whatsnew-grid {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-            .whatsnew-card {
-                padding: 24px 20px;
-            }
-            .whatsnew-card h3 {
-                font-size: 1.6rem;
-            }
-            .whatsnew-video-wrapper {
-                max-height: 350px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 16px;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            h2 {
-                font-size: 1.8rem;
-            }
-            .promo-banner h2 {
-                font-size: 2rem;
-            }
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-            .btn-circle {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-            .hero-content .hero-logo {
-                max-width: 200px;
-            }
-            .doctors-grid {
-                grid-template-columns: 1fr;
-            }
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            .service-card img {
-                height: 180px;
-            }
-            .floating-social {
-                right: 10px;
-                bottom: 90px;
-                gap: 10px;
-            }
-            .floating-social a {
-                width: 36px;
-                height: 36px;
-                font-size: 0.9rem;
-            }
-            .reels-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .ba-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-            }
-            .why-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                max-width: 400px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .marquee-item {
-                flex: 0 0 100px;
-                padding: 0 10px;
-            }
-            .marquee-item img {
-                max-height: 40px;
-            }
-            .faq-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            .faq-question {
-                font-size: 0.8rem;
-                padding: 12px 14px;
-            }
-            .faq-answer {
-                font-size: 0.75rem;
-                padding: 0 14px 12px;
-            }
-            .video-lightbox-content {
-                max-width: 100%;
-            }
-            .video-lightbox-close {
-                top: -40px;
-                font-size: 1.6rem;
-            }
-            .lightbox-close {
-                font-size: 1.6rem;
-                top: 15px;
-                right: 15px;
-            }
-            .lightbox img {
-                max-width: 98%;
-                max-height: 70vh;
-            }
-            .testimonial-item p {
-                font-size: 0.82rem;
-            }
-            .footer .footer-logo {
-                max-width: 120px;
-            }
-            .whatsnew-card h3 {
-                font-size: 1.4rem;
-            }
-            .whatsnew-video-wrapper {
-                max-height: 280px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ENHANCE CLINIC</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    /* ---------- CSS VARIABLES ---------- */
+    :root {
+      --primary: #6A4328;
+      --secondary: #F7F3EE;
+      --accent: #C8A56A;
+      --text-dark: #3A2A22;
+      --white: #FFFFFF;
+      --shadow: 0 12px 32px rgba(106, 67, 40, 0.06);
+      --radius: 20px;
+      --transition: 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--secondary);
+      color: var(--text-dark);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ---------- TYPOGRAPHY ---------- */
+    .font-playfair {
+      font-family: 'Playfair Display', serif;
+    }
+
+    h1, h2, h3, .heading {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    h1 { font-size: 3.8rem; line-height: 1.1; }
+    h2 { font-size: 2.6rem; margin-bottom: 0.5rem; }
+    h3 { font-size: 1.6rem; }
+
+    .section-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      border-left: 3px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    .section-sub {
+      color: #7a6a5e;
+      max-width: 540px;
+      margin-top: 8px;
+      font-weight: 300;
+    }
+
+    /* ---------- BUTTONS ---------- */
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.8rem 2.8rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+      border-radius: 50px;
+      transition: var(--transition);
+      cursor: pointer;
+      display: inline-block;
+      box-shadow: 0 8px 20px rgba(106, 67, 40, 0.15);
+      font-family: 'Poppins', sans-serif;
+    }
+    .btn-primary:hover {
+      background: #7f5539;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(106, 67, 40, 0.2);
+    }
+
+    .btn-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: white;
+      color: var(--primary);
+      border: none;
+      font-size: 1.4rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      animation: bounceDown 2s infinite;
+    }
+    .btn-circle:hover {
+      transform: scale(1.08);
+      background: var(--primary);
+      color: white;
+    }
+
+    @keyframes bounceDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
+
+    /* ---------- STICKY NAV (THINNER ON MOBILE) ---------- */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      padding: 18px 0;
+      transition: 0.4s ease;
+      background: transparent;
+    }
+    .navbar.scrolled {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      padding: 12px 0;
+    }
+    .navbar .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      position: relative;
+      width: 100%;
+      padding: 0 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    .nav-links a {
+      transition: 0.2s;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      letter-spacing: 0.3px;
+    }
+    .navbar.scrolled .nav-links a {
+      color: var(--text-dark);
+      text-shadow: none;
+    }
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Hamburger - properly centered on mobile */
+    .hamburger {
+      display: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: white;
+      z-index: 1000;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 6px 10px;
+      margin: -6px -10px;
+      line-height: 1;
+      background: transparent;
+      border: none;
+      transition: color 0.3s;
+    }
+    .navbar.scrolled .hamburger {
+      color: var(--text-dark);
+    }
+    .hamburger:focus {
+      outline: none;
+    }
+
+    /* ---------- MOBILE MENU (FULL SCREEN) ---------- */
+    .mobile-menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: white;
+      z-index: 998;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 40px 20px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu-overlay.open {
+      display: flex;
+      opacity: 1;
+    }
+    .mobile-menu-overlay .mobile-nav-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.2rem;
+    }
+    .mobile-menu-overlay .mobile-nav-links a {
+      color: var(--text-dark);
+      font-size: 1.8rem;
+      font-weight: 500;
+      transition: 0.2s;
+      letter-spacing: 1px;
+      font-family: 'Poppins', sans-serif;
+      padding: 8px 16px;
+    }
+    .mobile-menu-overlay .mobile-nav-links a:hover {
+      color: var(--accent);
+      transform: scale(1.05);
+    }
+    .mobile-menu-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      color: var(--text-dark);
+      font-size: 2.2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 999;
+      padding: 8px 12px;
+      background: transparent;
+      border: none;
+      line-height: 1;
+    }
+    .mobile-menu-close:hover {
+      transform: rotate(90deg);
+      color: var(--accent);
+    }
+    .mobile-menu-close:focus {
+      outline: none;
+    }
+
+    /* ---------- FLOATING SOCIAL ICONS (with arrow toggle) ---------- */
+    .floating-social-wrapper {
+      position: fixed;
+      right: 20px;
+      bottom: 120px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .floating-social {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .floating-social.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(30px);
+    }
+
+    .floating-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      font-size: 1.3rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(106, 67, 40, 0.25);
+      border: 2px solid rgba(255,255,255,0.1);
+      opacity: 0.7;
+    }
+    .floating-social a:hover {
+      transform: scale(1.12) translateX(-3px);
+      background: var(--accent);
+      color: white;
+      opacity: 1;
+    }
+    .floating-social a.messenger { background: #0084ff; }
+    .floating-social a.instagram { background: #E4405F; }
+    .floating-social a.facebook { background: #1877F2; }
+    .floating-social a.pricelist {
+      background: var(--accent);
+      box-shadow: 0 4px 16px rgba(201, 165, 107, 0.3);
+    }
+    .floating-social a.pricelist:hover { background: var(--primary); }
+
+    .floating-social .pricelist-label {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      background: white;
+      padding: 2px 8px;
+      border-radius: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      white-space: nowrap;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .floating-social-wrapper:hover .pricelist-label {
+      opacity: 1;
+    }
+
+    .social-toggle-btn {
+      background: white;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      color: var(--primary);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 6px;
+    }
+    .social-toggle-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: scale(1.05);
+    }
+
+    /* ---------- HERO (FULL SCREEN VIDEO) ---------- */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #2a1f1a;
+    }
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(42,31,26,0.5), rgba(106,67,40,0.3));
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .hero-content .hero-logo {
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto 1.5rem;
+      filter: drop-shadow(0 4px 30px rgba(0,0,0,0.2));
+    }
+    .hero-content .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      color: white;
+      padding: 0.3rem 1.6rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-content p {
+      font-size: 1.15rem;
+      max-width: 520px;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      font-weight: 300;
+      color: white;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    /* ---------- SECTION ANIMATIONS ---------- */
+    .section-animate {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .section-animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section { padding: 80px 0; }
+
+    /* ---------- WHAT'S NEW ---------- */
+    .whatsnew-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 30px;
+    }
+    .whatsnew-card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px 36px;
+      border: 1px solid #f2ece6;
+      transition: var(--transition);
+    }
+    .whatsnew-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px rgba(106,67,40,0.08);
+    }
+    .whatsnew-card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+    .whatsnew-card .highlight-text {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #3d2a20;
+      line-height: 1.8;
+    }
+    .whatsnew-card .highlight-text p { margin-bottom: 14px; }
+    .whatsnew-card .highlight-text strong { font-weight: 600; color: var(--primary); }
+    .whatsnew-video-wrapper {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: #1a1a1a;
+      aspect-ratio: 9 / 16;
+      max-height: 520px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .whatsnew-video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ---------- ABOUT, SERVICES, ETC ---------- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .about-image { position: relative; }
+    .about-image img {
+      width: 100%;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .about-image .floating-img {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      width: 40%;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+    }
+    .about-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+    .about-feature {
+      background: white;
+      padding: 16px 18px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border: 1px solid #f0e8e0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .about-feature i { color: var(--accent); font-size: 1.2rem; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 30px;
+    }
+    .service-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid #f2ece6;
+    }
+    .service-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px rgba(106,67,40,0.1); }
+    .service-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .service-card .service-body {
+      padding: 24px 26px 28px;
+      text-align: center;
+    }
+    .service-card .service-body h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+    .service-card .service-body p {
+      font-size: 0.85rem;
+      color: #5f4c3d;
+      line-height: 1.7;
+      text-align: left;
+    }
+    .service-card .read-more {
+      display: inline-block;
+      margin-top: 14px;
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .service-card .read-more:hover { border-bottom-color: var(--primary); }
+
+    .promo-banner {
+      background: linear-gradient(135deg, rgba(106,67,40,0.92), rgba(61,42,32,0.88)), url('images/about-1.png') center/cover fixed;
+      padding: 100px 0;
+      text-align: center;
+      color: white;
+    }
+    .promo-banner h2 { font-size: 3.2rem; margin-bottom: 0.6rem; }
+    .promo-banner p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    .doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .doctor-card { text-align: center; transition: var(--transition); }
+    .doctor-card:hover { transform: translateY(-4px); }
+    .doctor-card img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      border: 3px solid white;
+    }
+    .doctor-card h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; }
+    .doctor-card p { font-size: 0.8rem; color: #6a5a4e; }
+
+    .reels-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 30px;
+    }
+    .reel-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid #f2ece6;
+      transition: var(--transition);
+    }
+    .reel-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(106,67,40,0.08); }
+    .reel-card .video-wrapper {
+      position: relative;
+      padding-bottom: 100%;
+      background: transparent;
+      overflow: hidden;
+    }
+    .reel-card .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: transparent;
+    }
+    .reel-card .reel-info { padding: 14px 16px 16px; }
+    .reel-card .reel-info h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--primary);
+      margin-bottom: 3px;
+    }
+    .reel-card .reel-info p {
+      font-size: 0.78rem;
+      color: #6a5a4e;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+    .reel-card .reel-info .reel-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-weight: 500;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.5px;
+      transition: 0.2s;
+    }
+    .reel-card .reel-info .reel-link:hover { color: var(--primary); }
+
+    .ba-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .ba-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid #f2ece6;
+      background: white;
+      aspect-ratio: 1 / 1;
+    }
+    .ba-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(106,67,40,0.1); }
+    .ba-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      cursor: pointer;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .why-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid #f2ece6;
+      background: white;
+      pointer-events: none;
+    }
+    .why-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.92);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      cursor: pointer;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      cursor: default;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      color: white;
+      font-size: 2.8rem;
+      cursor: pointer;
+      transition: 0.3s;
+      background: none;
+      border: none;
+      z-index: 10000;
+    }
+    .lightbox-close:hover { transform: rotate(90deg); color: var(--accent); }
+
+    .brands-marquee {
+      background: white;
+      padding: 30px 0;
+      border-top: 1px solid #f0e8e0;
+      border-bottom: 1px solid #f0e8e0;
+      overflow: hidden;
+      position: relative;
+    }
+    .marquee-wrapper {
+      display: flex;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+    .marquee-track {
+      display: flex;
+      animation: scrollMarquee 20s linear infinite;
+      width: max-content;
+      will-change: transform;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      flex: 0 0 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+    }
+    .marquee-item img {
+      max-height: 70px;
+      width: auto;
+      object-fit: contain;
+      transition: 0.3s;
+    }
+    .marquee-item img:hover { transform: scale(1.05); }
+    @keyframes scrollMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .testimonial-carousel {
+      position: relative;
+      overflow: hidden;
+      margin-top: 30px;
+    }
+    .testimonial-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+    .testimonial-slide {
+      flex: 0 0 100%;
+      padding: 0 10px;
+    }
+    .testimonial-item {
+      background: white;
+      padding: 28px 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid #f2ece6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .testimonial-item .stars { color: var(--accent); margin-bottom: 10px; font-size: 0.9rem; }
+    .testimonial-item p {
+      font-style: italic;
+      color: #3d2a20;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+    .testimonial-item h5 {
+      margin-top: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .carousel-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid #e0d6cc;
+      background: white;
+      color: var(--primary);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-btn:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+      transform: scale(1.05);
+    }
+    .carousel-dots { display: flex; gap: 8px; }
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d4c9c0;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      padding: 0;
+    }
+    .carousel-dot.active { background: var(--primary); transform: scale(1.2); }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      margin-top: 20px;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+      border: 1px solid #f0e8e0;
+      overflow: hidden;
+    }
+    .faq-item.active .faq-answer { display: block; }
+    .faq-item.active .faq-question i { transform: rotate(180deg); }
+    .faq-question {
+      padding: 14px 18px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      gap: 10px;
+    }
+    .faq-question i { transition: 0.3s; color: var(--accent); flex-shrink: 0; }
+    .faq-answer {
+      padding: 0 18px 16px;
+      color: #5f4c3d;
+      display: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.8rem;
+    }
+    .faq-answer p { margin-bottom: 4px; }
+    .faq-answer .watch-video-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 18px;
+      background: var(--primary);
+      color: white;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      font-family: 'Poppins', sans-serif;
+    }
+    .faq-answer .watch-video-btn:hover {
+      background: #7f5539;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(106,67,40,0.15);
+    }
+
+    .video-lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.92);
+      z-index: 9998;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .video-lightbox.open { display: flex; }
+    .video-lightbox-content {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      background: transparent;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .video-lightbox-content .video-wrapper {
+      position: relative;
+      padding-bottom: 100%;
+      background: #000;
+    }
+    .video-lightbox-content .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .video-lightbox-close {
+      position: absolute;
+      top: -48px;
+      right: 0;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      background: none;
+      border: none;
+      z-index: 10;
+    }
+    .video-lightbox-close:hover { transform: rotate(90deg); color: var(--accent); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .contact-info p {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .contact-info i { width: 24px; color: var(--accent); }
+    .contact-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .contact-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .footer {
+      background: var(--primary);
+      color: #f0e8e0;
+      padding: 50px 0 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 30px;
+    }
+    .footer h4 { color: white; margin-bottom: 12px; font-family: 'Playfair Display', serif; }
+    .footer a {
+      color: #d4c5b8;
+      transition: 0.2s;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .footer a:hover { color: white; }
+    .footer .social a { margin-right: 14px; font-size: 1.2rem; }
+    .footer .footer-logo {
+      max-width: 180px;
+      height: auto;
+      margin-bottom: 12px;
+      filter: brightness(0) invert(1);
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 20px;
+      margin-top: 30px;
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 1024px) {
+      h1 { font-size: 2.8rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .hero-content .hero-logo { max-width: 320px; }
+      .reels-grid { grid-template-columns: repeat(2, 1fr); }
+      .ba-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .faq-grid { grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+      .whatsnew-grid { grid-template-columns: 1fr; gap: 30px; }
+      .whatsnew-video-wrapper { max-height: 400px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: block; }
+      .navbar .container {
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        padding: 0 16px;
+        position: relative;
+        min-height: 52px;
+      }
+      .navbar {
+        padding: 10px 0;
+      }
+      .navbar.scrolled {
+        padding: 8px 0;
+      }
+      .hero-content .hero-logo { max-width: 260px; }
+      .about-features { grid-template-columns: 1fr; }
+      .doctors-grid { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .floating-social-wrapper { right: 12px; bottom: 100px; }
+      .floating-social a { width: 40px; height: 40px; font-size: 1rem; }
+      .reels-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .ba-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+      .why-grid { grid-template-columns: repeat(3, 1fr); gap: 15px; }
+      .marquee-item { flex: 0 0 120px; padding: 0 12px; }
+      .marquee-item img { max-height: 50px; }
+      .faq-grid { grid-template-columns: 1fr; gap: 12px; }
+      .video-lightbox-content { max-width: 100%; }
+      .lightbox-close { font-size: 2rem; top: 20px; right: 20px; }
+      .lightbox img { max-width: 95%; max-height: 75vh; }
+      .testimonial-item { padding: 20px; }
+      .footer .footer-logo { max-width: 140px; }
+      .whatsnew-grid { grid-template-columns: 1fr; gap: 24px; }
+      .whatsnew-card { padding: 24px 20px; }
+      .whatsnew-card h3 { font-size: 1.6rem; }
+      .whatsnew-video-wrapper { max-height: 350px; }
+      .mobile-menu-overlay .mobile-nav-links a {
+        font-size: 1.8rem;
+        padding: 10px 20px;
+      }
+      .hamburger {
+        padding: 8px 10px;
+        margin: -8px -10px;
+        font-size: 1.5rem;
+        right: 12px;
+      }
+      .mobile-menu-close {
+        font-size: 2rem;
+        top: 20px;
+        right: 20px;
+        padding: 6px 8px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      h1 { font-size: 2rem; }
+      h2 { font-size: 1.8rem; }
+      .promo-banner h2 { font-size: 2rem; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .btn-circle { width: 50px; height: 50px; font-size: 1.2rem; }
+      .hero-content .hero-logo { max-width: 200px; }
+      .doctors-grid, .services-grid { grid-template-columns: 1fr; }
+      .service-card img { height: 180px; }
+      .floating-social-wrapper { right: 10px; bottom: 90px; }
+      .floating-social a { width: 36px; height: 36px; font-size: 0.9rem; }
+      .floating-social { gap: 10px; }
+      .reels-grid { grid-template-columns: 1fr; gap: 20px; }
+      .ba-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .why-grid { grid-template-columns: 1fr; gap: 20px; max-width: 400px; margin-left: auto; margin-right: auto; }
+      .marquee-item { flex: 0 0 100px; padding: 0 10px; }
+      .marquee-item img { max-height: 40px; }
+      .faq-grid { grid-template-columns: 1fr; gap: 10px; }
+      .faq-question { font-size: 0.8rem; padding: 12px 14px; }
+      .faq-answer { font-size: 0.75rem; padding: 0 14px 12px; }
+      .video-lightbox-content { max-width: 100%; }
+      .video-lightbox-close { top: -40px; font-size: 1.6rem; }
+      .lightbox-close { font-size: 1.6rem; top: 15px; right: 15px; }
+      .lightbox img { max-width: 98%; max-height: 70vh; }
+      .testimonial-item p { font-size: 0.82rem; }
+      .footer .footer-logo { max-width: 120px; }
+      .whatsnew-card h3 { font-size: 1.4rem; }
+      .whatsnew-video-wrapper { max-height: 280px; }
+      .mobile-menu-overlay .mobile-nav-links a {
+        font-size: 1.6rem;
+        padding: 10px 18px;
+      }
+      .hamburger {
+        padding: 6px 8px;
+        margin: -6px -8px;
+        font-size: 1.4rem;
+        right: 10px;
+      }
+      .navbar .container {
+        min-height: 48px;
+        padding: 0 12px;
+      }
+      .mobile-menu-close {
+        font-size: 1.8rem;
+        top: 16px;
+        right: 16px;
+        padding: 4px 6px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <!-- ========== FLOATING SOCIAL ICONS + PRICELIST ========== -->
-    <div class="floating-social">
-        <a href="https://m.me/ZmVlZGJhY2s6MTIyMTQwODA3NzkxMDExMDk0" class="messenger" target="_blank" aria-label="Messenger">
-            <i class="fab fa-facebook-messenger"></i>
-        </a>
-        <a href="https://www.instagram.com/enhanceclinicph" class="instagram" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=61580332830721" class="facebook" target="_blank" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://www.canva.com/design/DAG_VGCY_lg/IXNSyA1zcxhDLqhbVI8sBw/view?utlId=h5c528e7456#1" class="pricelist" target="_blank" aria-label="Price List">
-            <i class="fas fa-tag"></i>
-        </a>
-        <span class="pricelist-label">Price List</span>
+  <!-- ========== FLOATING SOCIAL ICONS + PRICELIST (arrow toggle) ========== -->
+  <div class="floating-social-wrapper" id="socialWrapper">
+    <div class="floating-social" id="socialIcons">
+      <a href="https://m.me/enhanceclinic" class="messenger" target="_blank" aria-label="Messenger">
+        <i class="fab fa-facebook-messenger"></i>
+      </a>
+      <a href="https://www.instagram.com/enhanceclinicph" class="instagram" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.facebook.com/enhanceclinic" class="facebook" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.canva.com/design/DAG_VGCY_lg/IXNSyA1zcxhDLqhbVI8sBw/view?utlId=h5c528e7456#1" class="pricelist" target="_blank" aria-label="Price List">
+        <i class="fas fa-tag"></i>
+      </a>
+      <span class="pricelist-label">Price List</span>
     </div>
+    <button class="social-toggle-btn" id="socialToggle" aria-label="Toggle social icons">
+      <i class="fas fa-chevron-right" id="toggleIcon"></i>
+    </button>
+  </div>
 
-    <!-- ========== MOBILE MENU OVERLAY (WHITE BACKGROUND, BROWN TEXT) ========== -->
-    <div class="mobile-menu-overlay" id="mobileMenu">
-        <div class="mobile-menu-close" id="mobileMenuClose">
-            <i class="fas fa-times"></i>
-        </div>
-        <div class="mobile-nav-links">
-            <a href="#">Home</a>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#reels">Reels</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#faq">FAQ</a>
-            <a href="#contact">Contact</a>
-        </div>
+  <!-- ========== MOBILE MENU OVERLAY ========== -->
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="mobile-nav-links">
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#reels">Reels</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
     </div>
+  </div>
 
-    <!-- ========== NAVIGATION ========== -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
-            <div class="nav-links" id="navLinks">
-                <a href="#">Home</a>
-                <a href="#about">About</a>
-                <a href="#services">Services</a>
-                <a href="#reels">Reels</a>
-                <a href="#testimonials">Testimonials</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- ========== HERO - FULL SCREEN VIDEO ========== -->
-    <section class="hero" id="home">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="videos/hero-video.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-            <img src="images/logo.png" alt="ENHANCE CLINIC" class="hero-logo" onerror="this.style.display='none'; this.parentElement.innerHTML += '<h1 class=\'font-playfair\' style=\'color:white;font-size:4rem;\'>ENHANCE CLINIC</h1>';">
-            <div class="badge"><i class="fas fa-spa"></i> premium aesthetics</div>
-            <p>Enhance Clinic offers professional aesthetic and skin care treatments designed to help you achieve healthier, brighter, and more youthful-looking skin in a safe and welcoming environment.</p>
-            <div class="hero-btns">
-                <a href="https://m.me/enhancebydocize" class="btn-primary">Book Consultation</a>
-            </div>
-        </div>
-
-        <div class="hero-scroll-down">
-            <a href="#about" class="btn-circle" aria-label="Scroll down">
-                <i class="fas fa-chevron-down"></i>
-            </a>
-        </div>
-    </section>
-
-  
-
-    <!-- ========== ABOUT ========== -->
-    <section id="about" style="background: white;">
-        <div class="container section-animate" id="aboutAnim">
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="images/about.png" alt="Clinic interior">
-                    <img src="images/about-1.png" alt="Treatment" class="floating-img">
-                </div>
-                <div>
-                    <span class="section-tag">About Us</span>
-                    <h2 class="font-playfair">Your Journey Starts with Expert Care</h2>
-                    <p style="color: #5f4c3d; margin: 16px 0;">At Enhance Clinic, we believe confidence comes from within. Our goal is to provide personalized aesthetic treatments using modern technology, quality products, and professional care. Every treatment is tailored to your unique concerns, helping you achieve natural-looking, long-lasting results.</p>
-                    <div class="about-features">
-                        <div class="about-feature"><i class="fas fa-user-md"></i> Licensed Professionals</div>
-                        <div class="about-feature"><i class="fas fa-heart"></i> Personalized Treatments</div>
-                        <div class="about-feature"><i class="fas fa-microscope"></i> Modern Equipment</div>
-                        <div class="about-feature"><i class="fas fa-leaf"></i> Comfortable Environment</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-	
-	  <!-- ========== WHAT'S NEW ========== -->
-    <section id="whatsnew" style="background: white;">
-        <div class="container section-animate" id="whatsnewAnim">
-            <span class="section-tag">What's New</span>
-            <h2 class="font-playfair">Latest Arrival</h2>
-            <p class="section-sub">Experience the future of skin rejuvenation with our newest technology.</p>
-
-            <div class="whatsnew-grid">
-                <!-- Description Card -->
-                <div class="whatsnew-card">
-                    <h3>Mosaic 3D Laser</h3>
-                    <div class="highlight-text">
-                        <p>
-                            <span class="emoji-big"></span><strong>The wait is over!</strong> 
-                            <strong>Mosaic 3D Laser</strong> has officially arrived at <strong>Enhance Clinic</strong>. 
-                        </p>
-                        <p style="margin-top: 14px;">
-                            Ready to transform your skin? Say goodbye to acne scars, rough texture, enlarged pores, and dull skin with our newest advanced laser technology.
-                        </p>
-                        <p style="margin-top: 14px; font-weight: 400;">
-                            Experience smoother, clearer, and more radiant skin, because your glow deserves the latest innovation.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Instagram Reel Embed -->
-                <div class="whatsnew-video-wrapper">
-                    <iframe src="https://www.instagram.com/reel/DbpCkJRBaCE/embed" allowfullscreen loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== SERVICES (SHORT PARAGRAPH DESCRIPTIONS) ========== -->
-    <section id="services">
-        <div class="container section-animate" id="servicesAnim">
-            <span class="section-tag">What We Offer</span>
-            <h2 class="font-playfair">Premium Services</h2>
-            <p class="section-sub">Comprehensive aesthetic and dermatological treatments tailored to your needs.</p>
-
-            <div class="services-grid">
-                <!-- Facial -->
-                <div class="service-card">
-                    <img src="images/service-1.png" alt="Facial">
-                    <div class="service-body">
-                        <h4>Facial</h4>
-                        <p>Restore and rejuvenate your skin with our comprehensive facial treatments, including microneedling, chemical peeling, whitening services, Cosmelan Peel, and our exclusive 3-in-1 Synergistic Treatment for a radiant, healthy complexion.</p>
-                        <span class="read-more">Learn More →</span>
-                    </div>
-                </div>
-
-                <!-- Injections & Fillers -->
-                <div class="service-card">
-                    <img src="images/service-2.png" alt="Injections & Fillers">
-                    <div class="service-body">
-                        <h4>Injections & Fillers</h4>
-                        <p>Enhance your natural features with our advanced injection and filler services, including neurotoxins, HA fillers, biostimulators, mesotherapy, and Belotero Revive for smooth, natural-looking results.</p>
-                        <span class="read-more">Learn More →</span>
-                    </div>
-                </div>
-
-                <!-- Ultherapy Prime -->
-                <div class="service-card">
-                    <img src="images/service-3.png" alt="Ultherapy Prime">
-                    <div class="service-body">
-                        <h4>Ultherapy Prime</h4>
-                        <p>Experience non-surgical lifting and tightening with Ultherapy Prime. We also offer hair restoration, tattoo removal, skin lesion removal, and other doctor-led procedures for comprehensive care.</p>
-                        <span class="read-more">Learn More →</span>
-                    </div>
-                </div>
-
-                <!-- Weight Loss -->
-                <div class="service-card">
-                    <img src="images/service-4.png" alt="Weight Loss">
-                    <div class="service-body">
-                        <h4>Weight Loss</h4>
-                        <p>Achieve your wellness goals with our weight loss programs, including slimming services, body contouring, mesolipo therapy, and Slimshot / Tirzepatide treatments tailored to your needs.</p>
-                        <span class="read-more">Learn More →</span>
-                    </div>
-                </div>
-
-                <!-- Hair Restoration -->
-                <div class="service-card">
-                    <img src="images/service-5.png" alt="Hair Restoration">
-                    <div class="service-body">
-                        <h4>Hair Restoration</h4>
-                        <p>Regain your confidence with our hair restoration solutions, including doctor consultations, special treatments, glutathione services, and Enhance NAD+ Drip for optimal results.</p>
-                        <span class="read-more">Learn More →</span>
-                    </div>
-                </div>
-
-                <!-- Nails, Lash, Brow Services -->
-                <div class="service-card">
-                    <img src="images/service-6.png" alt="Nails, Lash, Brow Services">
-                    <div class="service-body">
-                        <h4>Nails, Lash, Brow Services</h4>
-                        <p>Complete your look with our nail services, lash services, brow lamination, and hair removal services designed to enhance your natural beauty with precision and care.</p>
-                        <span class="read-more">Learn More →</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== WHY CHOOSE US (3 IMAGE CARDS - NOT CLICKABLE) ========== -->
-    <section style="background: white; padding: 60px 0;">
-        <div class="container section-animate" id="whyAnim">
-            <span class="section-tag">Why Choose Us</span>
-            <h2 class="font-playfair">Experience Radiant Skin</h2>
-
-            <div class="why-grid">
-                <div class="why-card">
-                    <img src="images/why-1.jpg" alt="Why Choose Enhance Clinic">
-                </div>
-                <div class="why-card">
-                    <img src="images/why-2.jpg" alt="Why Choose Enhance Clinic">
-                </div>
-                <div class="why-card">
-                    <img src="images/why-3.jpg" alt="Why Choose Enhance Clinic">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== IMAGE LIGHTBOX ========== -->
-    <div class="lightbox" id="imageLightbox">
-        <button class="lightbox-close" id="imageLightboxClose"><i class="fas fa-times"></i></button>
-        <img id="lightboxImage" src="" alt="Full screen image">
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="nav-links" id="navLinks">
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#reels">Reels</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
+  </nav>
 
-    <!-- ========== PROMO BANNER ========== -->
-    <section class="promo-banner">
-        <div class="container section-animate" id="promoAnim">
-            <h2 class="font-playfair">Elevate Your Confidence.</h2>
-            <p>Feel empowered. Feel like the best version of yourself.</p>
-            <a href="#" class="btn-primary" style="background: white; color: var(--primary);">Book Consultation</a>
-        </div>
-    </section>
-
-    <!-- ========== DOCTORS ========== -->
-    <section id="doctors" style="background: white;">
-        <div class="container section-animate" id="doctorsAnim">
-            <span class="section-tag">Our Team</span>
-            <h2 class="font-playfair">Meet Our Professionals</h2>
-            <div class="doctors-grid">
-                <div class="doctor-card"><img src="images/drjerome.png" alt="Doctor"><h4>Dr. Niño Jerome Joaquim Vanguardia</h4><p>Hair Transplant Surgeon · Aesthetic Physician</p></div>
-                <div class="doctor-card"><img src="images/drize.png" alt="Doctor"><h4>Dr. Mary Partize L. Gonzales-Vanguardia</h4><p>Aesthetic Dermatology</p></div>
-                <div class="doctor-card"><img src="images/draleli.png" alt="Doctor"><h4>Dr. Aleli Abad</h4><p>Aesthetic Physician</p></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== INSTAGRAM REELS (3x2 GRID + BEFORE & AFTER GALLERY) ========== -->
-    <section id="reels">
-        <div class="container section-animate" id="reelsAnim">
-            <span class="section-tag">Instagram Reels</span>
-            <h2 class="font-playfair">Real Stories, Real Results</h2>
-            <p class="section-sub">Watch real transformations and experiences from our patients.</p>
-
-            <div class="reels-grid">
-                <!-- Reel 1 -->
-                <div class="reel-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.instagram.com/reel/DYH0WfMhGTG/embed" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <div class="reel-info">
-                        <h4>Weight Loss Journey</h4>
-                        <p>Witness the weight loss journey of Doc Lorenzo with Enhance Clinic.</p>
-                        <a href="https://www.instagram.com/reel/DYH0WfMhGTG/" target="_blank" class="reel-link">View on Instagram →</a>
-                    </div>
-                </div>
-
-                <!-- Reel 2 -->
-                <div class="reel-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.instagram.com/reel/DaE6g7vhObV/embed" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <div class="reel-info">
-                        <h4>Ultherapy PRIME</h4>
-                        <p>Watch Dr. Ize perform the next-generation ultrasound lifting treatment.</p>
-                        <a href="https://www.instagram.com/reel/DaE6g7vhObV/" target="_blank" class="reel-link">View on Instagram →</a>
-                    </div>
-                </div>
-
-                <!-- Reel 3 -->
-                <div class="reel-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.instagram.com/reel/DbfJUQVhIrZ/embed" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <div class="reel-info">
-                        <h4>PDRN Facial</h4>
-                        <p>Ms. Kayne shares her experience with our PDRN Facial treatment.</p>
-                        <a href="https://www.instagram.com/reel/DbfJUQVhIrZ/" target="_blank" class="reel-link">View on Instagram →</a>
-                    </div>
-                </div>
-
-                <!-- Reel 4 -->
-                <div class="reel-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.instagram.com/reel/DbMvD0UijxA/embed" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <div class="reel-info">
-                        <h4>Sculptra Journey</h4>
-                        <p>"The goal isn't to look younger. It is to look like the best version of myself."</p>
-                        <a href="https://www.instagram.com/reel/DbMvD0UijxA/" target="_blank" class="reel-link">View on Instagram →</a>
-                    </div>
-                </div>
-
-                <!-- Reel 5 -->
-                <div class="reel-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.instagram.com/reel/DVDWE35gXd0/embed" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <div class="reel-info">
-                        <h4>A Little Secret Glow</h4>
-                        <p>A little secret glow for a special surprise. Sometimes, the best surprises aren't wrapped, they're felt in your confidence. With Profhilo, your skin becomes smoother, firmer, and deeply hydrated.</p>
-                        <a href="https://www.instagram.com/reel/DVDWE35gXd0/" target="_blank" class="reel-link">View on Instagram →</a>
-                    </div>
-                </div>
-
-                <!-- Reel 6 -->
-                <div class="reel-card">
-                    <div class="video-wrapper">
-                        <iframe src="https://www.instagram.com/reel/DbKAp1jiOde/embed" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <div class="reel-info">
-                        <h4>PRP Mesotherapy for Hair</h4>
-                        <p>Dr. Jerome performs PRP Mesotherapy via the U225 injector for hair regrowth.</p>
-                        <a href="https://www.instagram.com/reel/DbKAp1jiOde/" target="_blank" class="reel-link">View on Instagram →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Before & After Gallery (Images Only - No Title) -->
-            <div class="ba-grid">
-                <div class="ba-card">
-                    <img src="images/ba-1.jpg" alt="Before & After 1">
-                </div>
-                <div class="ba-card">
-                    <img src="images/ba-2.jpg" alt="Before & After 2">
-                </div>
-                <div class="ba-card">
-                    <img src="images/ba-3.jpg" alt="Before & After 3">
-                </div>
-                <div class="ba-card">
-                    <img src="images/ba-4.jpg" alt="Before & After 4">
-                </div>
-                <div class="ba-card">
-                    <img src="images/ba-5.jpg" alt="Before & After 5">
-                </div>
-                <div class="ba-card">
-                    <img src="images/ba-6.jpg" alt="Before & After 6">
-                </div>
-                <div class="ba-card">
-                    <img src="images/ba-7.jpg" alt="Before & After 7">
-                </div>
-                <div class="ba-card">
-                    <img src="images/ba-8.jpg" alt="Before & After 8">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== BRANDS MARQUEE (INFINITE LOOP) ========== -->
-    <section class="brands-marquee">
-        <div class="marquee-wrapper">
-            <div class="marquee-track" id="marqueeTrack">
-                <div class="marquee-item"><img src="images/brands/brand-1.png" alt="Brand 1"></div>
-                <div class="marquee-item"><img src="images/brands/brand-2.png" alt="Brand 2"></div>
-                <div class="marquee-item"><img src="images/brands/brand-3.png" alt="Brand 3"></div>
-                <div class="marquee-item"><img src="images/brands/brand-4.png" alt="Brand 4"></div>
-                <div class="marquee-item"><img src="images/brands/brand-5.png" alt="Brand 5"></div>
-                <div class="marquee-item"><img src="images/brands/brand-6.png" alt="Brand 6"></div>
-                <div class="marquee-item"><img src="images/brands/brand-7.png" alt="Brand 7"></div>
-                <div class="marquee-item"><img src="images/brands/brand-8.png" alt="Brand 8"></div>
-                <div class="marquee-item"><img src="images/brands/brand-9.png" alt="Brand 9"></div>
-                <!-- Duplicate for seamless loop -->
-                <div class="marquee-item"><img src="images/brands/brand-1.png" alt="Brand 1"></div>
-                <div class="marquee-item"><img src="images/brands/brand-2.png" alt="Brand 2"></div>
-                <div class="marquee-item"><img src="images/brands/brand-3.png" alt="Brand 3"></div>
-                <div class="marquee-item"><img src="images/brands/brand-4.png" alt="Brand 4"></div>
-                <div class="marquee-item"><img src="images/brands/brand-5.png" alt="Brand 5"></div>
-                <div class="marquee-item"><img src="images/brands/brand-6.png" alt="Brand 6"></div>
-                <div class="marquee-item"><img src="images/brands/brand-7.png" alt="Brand 7"></div>
-                <div class="marquee-item"><img src="images/brands/brand-8.png" alt="Brand 8"></div>
-                <div class="marquee-item"><img src="images/brands/brand-9.png" alt="Brand 9"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== FAQ (2-COLUMN COMPRESSED - ONLY ONE OPEN AT A TIME) ========== -->
-    <section id="faq" style="background: white;">
-        <div class="container section-animate" id="faqAnim">
-            <span class="section-tag">FAQ</span>
-            <h2 class="font-playfair">Frequently Asked Questions</h2>
-
-            <div class="faq-grid">
-                <!-- General Questions -->
-                <div class="faq-item active">
-                    <div class="faq-question">What happens during my first consultation? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p>Your consultation includes a personalized assessment with our doctor. We'll discuss your concerns, goals, medical history, and recommend the most suitable treatment plan for you.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">How do I know which treatment is right for me? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p>Every patient is unique. During your consultation, our doctor will evaluate your concerns and recommend treatments based on your needs, lifestyle, and desired results.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">Are your treatments safe? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p>Yes. All procedures are performed by trained medical professionals using clinically recognized techniques and high-quality products.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">Is there any downtime after treatment? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p>Downtime varies depending on the procedure. Many treatments have little to no downtime, while some advanced procedures may require a few days of recovery.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">When will I see results? <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p>Some treatments provide noticeable improvements within days, while others gradually enhance your appearance over several weeks or months.</p>
-                    </div>
-                </div>
-
-                <!-- Ultherapy Prime -->
-                <div class="faq-item">
-                    <div class="faq-question">Ultherapy Prime <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p><strong>What is Ultherapy Prime?</strong><br>Non-surgical ultrasound treatment to lift and tighten skin by stimulating natural collagen production.</p>
-                        <p><strong>Which areas can be treated?</strong><br>Face, neck, and under the chin.</p>
-                        <p><strong>How soon will I see results?</strong><br>Initial improvement is noticeable, with full results developing over the following months.</p>
-                        <button class="watch-video-btn" data-video="https://www.instagram.com/reel/DXGEw0ygXvE/embed">Watch Video</button>
-                    </div>
-                </div>
-
-                <!-- Sculptra -->
-                <div class="faq-item">
-                    <div class="faq-question">Sculptra <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p><strong>What is Sculptra?</strong><br>Injectable treatment that restores facial volume by stimulating natural collagen production.</p>
-                        <p><strong>How long do results last?</strong><br>Results develop over months and may last up to two years or longer.</p>
-                        <p><strong>Is Sculptra painful?</strong><br>Most patients experience only mild discomfort with numbing options available.</p>
-                        <button class="watch-video-btn" data-video="https://www.instagram.com/reel/DZMaLbpBw1u/embed">Watch Video</button>
-                    </div>
-                </div>
-
-                <!-- Profhilo Structura -->
-                <div class="faq-item">
-                    <div class="faq-question">Profhilo Structura <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p><strong>What is Profhilo Structura?</strong><br>Injectable treatment that improves facial structure, skin quality, and firmness.</p>
-                        <p><strong>Who is a good candidate?</strong><br>Adults with facial volume changes, skin laxity, or early signs of aging.</p>
-                        <p><strong>How many sessions?</strong><br>Varies per patient. Your doctor will create a personalized plan.</p>
-                        <button class="watch-video-btn" data-video="https://www.instagram.com/reel/DY6DH89B97m/embed">Watch Video</button>
-                    </div>
-                </div>
-
-                <!-- BioRePeel -->
-                <div class="faq-item">
-                    <div class="faq-question">BioRePeel <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p><strong>What is BioRePeel?</strong><br>Chemical peel that exfoliates skin while improving texture, acne, and fine lines.</p>
-                        <p><strong>Will my skin peel?</strong><br>Some patients experience minimal peeling, others may have none at all.</p>
-                        <p><strong>Can I return to work?</strong><br>Yes. Most patients resume normal activities shortly after treatment.</p>
-                        <button class="watch-video-btn" data-video="https://www.instagram.com/reel/DYopx-1hdlK/embed">Watch Video</button>
-                    </div>
-                </div>
-
-                <!-- Restylane -->
-                <div class="faq-item">
-                    <div class="faq-question">Restylane <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p><strong>What is Restylane?</strong><br>Dermal filler that restores facial volume and softens wrinkles and folds.</p>
-                        <p><strong>How long do fillers last?</strong><br>Results typically last several months, depending on the treatment area.</p>
-                        <p><strong>Will I look natural?</strong><br>Yes. Our goal is balanced, natural-looking enhancements.</p>
-                        <button class="watch-video-btn" data-video="https://www.instagram.com/reel/DYv3tnDBrVm/embed">Watch Video</button>
-                    </div>
-                </div>
-
-                <!-- Tirzepatide -->
-                <div class="faq-item">
-                    <div class="faq-question">Tirzepatide <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p><strong>What is Tirzepatide?</strong><br>Prescription medication for medically supervised weight management programs.</p>
-                        <p><strong>Is it suitable for everyone?</strong><br>No. Eligibility depends on medical history and doctor's assessment.</p>
-                        <p><strong>Do I still need diet and exercise?</strong><br>Yes. Healthy habits remain important for achieving the best results.</p>
-                        <button class="watch-video-btn" data-video="https://www.instagram.com/reel/DXhDXyEAct0/embed">Watch Video</button>
-                    </div>
-                </div>
-
-                <!-- Nourkrin -->
-                <div class="faq-item">
-                    <div class="faq-question">Nourkrin <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p><strong>What is Nourkrin?</strong><br>Clinically researched supplement that supports hair growth and improves hair quality.</p>
-                        <p><strong>Who is it suitable for?</strong><br>Individuals experiencing hair thinning or looking to support healthier hair growth.</p>
-                        <button class="watch-video-btn" data-video="https://www.instagram.com/reel/DWNgQingVZ7/embed">Watch Video</button>
-                    </div>
-                </div>
-
-                <!-- Profhilo -->
-                <div class="faq-item">
-                    <div class="faq-question">Profhilo <i class="fas fa-chevron-down"></i></div>
-                    <div class="faq-answer">
-                        <p><strong>What is Profhilo?</strong><br>Skin remodelling treatment that improves laxity, hydration, and overall skin quality.</p>
-                        <p><strong>How many sessions?</strong><br>Typically two sessions, spaced about a month apart.</p>
-                        <button class="watch-video-btn" data-video="https://www.instagram.com/reel/DWGhmDaARrv/embed">Watch Video</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========== VIDEO LIGHTBOX ========== -->
-    <div class="video-lightbox" id="videoLightbox">
-        <div class="video-lightbox-content">
-            <button class="video-lightbox-close" id="videoLightboxClose"><i class="fas fa-times"></i></button>
-            <div class="video-wrapper" id="videoWrapper">
-                <iframe id="videoIframe" src="" allowfullscreen loading="lazy"></iframe>
-            </div>
-        </div>
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="home">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="videos/hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img src="images/logo.png" alt="ENHANCE CLINIC" class="hero-logo" onerror="this.style.display='none'; this.parentElement.innerHTML += '<h1 class=\'font-playfair\' style=\'color:white;font-size:4rem;\'>ENHANCE CLINIC</h1>';">
+      <div class="badge"><i class="fas fa-spa"></i> premium aesthetics</div>
+      <p>Enhance Clinic offers professional aesthetic and skin care treatments designed to help you achieve healthier, brighter, and more youthful-looking skin in a safe and welcoming environment.</p>
+      <div class="hero-btns">
+        <a href="https://m.me/enhancebydocize" class="btn-primary">Book Consultation</a>
+      </div>
     </div>
+    <div class="hero-scroll-down">
+      <a href="#about" class="btn-circle" aria-label="Scroll down"><i class="fas fa-chevron-down"></i></a>
+    </div>
+  </section>
 
-    <!-- ========== TESTIMONIALS CAROUSEL ========== -->
-    <section id="testimonials">
-        <div class="container section-animate" id="testimonialsAnim">
-            <span class="section-tag">Testimonials</span>
-            <h2 class="font-playfair">What Our Clients Say</h2>
-            <p class="section-sub">Real stories from real people who trusted Enhance Clinic.</p>
-
-            <div class="testimonial-carousel">
-                <div class="testimonial-track" id="testimonialTrack">
-                    <!-- Testimonial 1 -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-item">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <p>"I've had a great experience with Enhance so far! The staff are always warm, professional, and accommodating, they make every visit feel comfortable and smooth. Doc Ize is very knowledgeable and approachable, and I really appreciate how she takes the time to explain things thoroughly. The place itself is clean, relaxing, and well-maintained, definitely gives off a welcoming and professional vibe. Highly recommended!"</p>
-                            <h5>— Justine M.</h5>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 2 -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-item">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <p>"I just want to give an update with my slimshot journey. I came in last August 16, weighing 67kgs. And today, September 13, I'm currently at 60kgs. No symptoms at all. At first, I was a little scared kasi baka biglaan symptoms. Ang galing kasi akala ko it wouldn't work since I'm diabetic and I have PCOS for 7 years."</p>
-                            <h5>— Slimshot Patient</h5>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 3 -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-item">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <p>"Thank you doc and enhance team! Just 1 and half month on slimshot, I lost 10kg. Nawala na yung 'cortisol face' ko caused by PCOS. Never thought I could lose this much weight after giving birth and having PCOS."</p>
-                            <h5>— Slimshot Patient</h5>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 4 -->
-                    <div class="testimonial-slide">
-                        <div class="testimonial-item">
-                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                            <p>"Doc thank you for my fillers and Jaw tox sobrang gandaaa. No bruising po. Excited na po ako ulit sa next treatment."</p>
-                            <h5>— Fillers & Jaw Tox Patient</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-controls">
-                    <button class="carousel-btn" id="prevTestimonial"><i class="fas fa-chevron-left"></i></button>
-                    <div class="carousel-dots" id="testimonialDots"></div>
-                    <button class="carousel-btn" id="nextTestimonial"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
+  <!-- ========== WHAT'S NEW ========== -->
+  <section id="whatsnew" style="background: white;">
+    <div class="container section-animate" id="whatsnewAnim">
+      <span class="section-tag">What's New</span>
+      <h2 class="font-playfair">Latest Arrival</h2>
+      <p class="section-sub">Experience the future of skin rejuvenation with our newest technology.</p>
+      <div class="whatsnew-grid">
+        <div class="whatsnew-card">
+          <h3>Mosaic 3D Laser — Now Available at Enhance Clinic!</h3>
+          <div class="highlight-text">
+            <p>The wait is over! <strong>Mosaic 3D Laser</strong> is now available at Enhance Clinic.</p>
+            <p>We're excited to bring this advanced laser technology to our clinic to help you achieve smoother, clearer, and more radiant-looking skin.</p>
+            <p><strong>Mosaic 3D Laser</strong> is designed to help improve the appearance of acne scars, uneven skin texture, enlarged pores, fine lines, and dull-looking skin. By supporting the skin's natural renewal process, it can help reveal a more refined, refreshed, and youthful-looking complexion over time.</p>
+            <p><strong>Advanced technology is now right here at Enhance Clinic.</strong></p>
+            <p>Ready to give your skin the upgrade it deserves? Visit Enhance Clinic and discover what Mosaic 3D Laser can do for your skin. Your journey to smoother, healthier-looking, and more confident skin starts here.</p>
+          </div>
         </div>
-    </section>
-
-    <!-- ========== CONTACT ========== -->
-    <section id="contact" style="background: white;">
-        <div class="container section-animate" id="contactAnim">
-            <span class="section-tag">Contact</span>
-            <h2 class="font-playfair">Get in Touch</h2>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <p><i class="fas fa-location-dot"></i> Unit 22 Bridgepoint Bldg., 2nd Floor, Brgy. Anastacia, Sto. Tomas, Batangas</p>
-                    <p><i class="fas fa-map-pin"></i> Waze: Enhance by Doc Ize</p>
-                    <p><i class="fas fa-phone"></i> 0976-487-5779</p>
-                    <p><i class="far fa-calendar-alt"></i> Tuesday–Sunday · 10AM – 8PM</p>
-                    <p><i class="fas fa-envelope"></i> hello@enhanceclinic.com</p>
-                    <div style="margin-top: 20px; border-radius: 12px; overflow: hidden; height: 200px; background: #e0d6cc;">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3868.247146957572!2d121.16113491483994!3d14.179326590294798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339bd7e4b7f6b1a1%3A0x8b9e8b7f1c8b7f1c!2sSto.%20Tomas%20Batangas!5e0!3m2!1sen!2sph!4v1650000000000" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-                <div class="contact-image">
-                    <img src="images/getintouch.png" alt="Get in touch with Enhance Clinic">
-                </div>
-            </div>
+        <div class="whatsnew-video-wrapper">
+          <video autoplay muted loop playsinline>
+            <source src="videos/newvideo.mp4" type="video/mp4">
+          </video>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- ========== FOOTER ========== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <img src="images/logo.png" alt="ENHANCE CLINIC" class="footer-logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<h4>ENHANCE CLINIC</h4>'">
-                    <p style="opacity:0.7; max-width:260px; margin-top:8px;">Premium aesthetic care. Where science meets confidence.</p>
-                    <div class="social" style="margin-top: 12px;">
-                        <a href="https://www.facebook.com/profile.php?id=61580332830721" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/enhanceclinicph" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://m.me/ZmVlZGJhY2s6MTIyMTQwODA3NzkxMDExMDk0" target="_blank" aria-label="Messenger"><i class="fab fa-facebook-messenger"></i></a>
-                        <a href="https://www.canva.com/design/DAG_VGCY_lg/IXNSyA1zcxhDLqhbVI8sBw/view?utlId=h5c528e7456#1" target="_blank" aria-label="Price List"><i class="fas fa-tag"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h4>Quick Links</h4>
-                    <a href="#">Home</a><br>
-                    <a href="#about">About</a><br>
-                    <a href="#services">Services</a><br>
-                    <a href="#reels">Reels</a>
-                </div>
-                <div>
-                    <h4>Services</h4>
-                    <a href="#">Facial</a><br>
-                    <a href="#">Injections</a><br>
-                    <a href="#">Ultherapy Prime</a><br>
-                    <a href="#">Weight Loss</a><br>
-                    <a href="#">Hair Restoration</a>
-                </div>
-                <div>
-                    <h4>Contact</h4>
-                    <p style="opacity:0.7;"><i class="fas fa-phone"></i> 0976-487-5779</p>
-                    <p style="opacity:0.7;"><i class="far fa-clock"></i> Tues–Sun 10AM–8PM</p>
-                    <p style="opacity:0.7;"><i class="fas fa-map-pin"></i> Sto. Tomas, Batangas</p>
-                </div>
-            </div>
-            <div class="footer-bottom">© 2026 ENHANCE CLINIC. All rights reserved.</div>
+  <!-- ========== ABOUT ========== -->
+  <section id="about" style="background: white;">
+    <div class="container section-animate" id="aboutAnim">
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="images/about.png" alt="Clinic interior">
+          <img src="images/about-1.png" alt="Treatment" class="floating-img">
         </div>
-    </footer>
+        <div>
+          <span class="section-tag">About Us</span>
+          <h2 class="font-playfair">Your Journey Starts with Expert Care</h2>
+          <p style="color: #5f4c3d; margin: 16px 0;">At Enhance Clinic, we believe confidence comes from within. Our goal is to provide personalized aesthetic treatments using modern technology, quality products, and professional care. Every treatment is tailored to your unique concerns, helping you achieve natural-looking, long-lasting results.</p>
+          <div class="about-features">
+            <div class="about-feature"><i class="fas fa-user-md"></i> Licensed Professionals</div>
+            <div class="about-feature"><i class="fas fa-heart"></i> Personalized Treatments</div>
+            <div class="about-feature"><i class="fas fa-microscope"></i> Modern Equipment</div>
+            <div class="about-feature"><i class="fas fa-leaf"></i> Comfortable Environment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // ---------- STICKY NAV ----------
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 40) nav.classList.add('scrolled');
-            else nav.classList.remove('scrolled');
-        });
+  <!-- ========== SERVICES ========== -->
+  <section id="services">
+    <div class="container section-animate" id="servicesAnim">
+      <span class="section-tag">What We Offer</span>
+      <h2 class="font-playfair">Premium Services</h2>
+      <p class="section-sub">Comprehensive aesthetic and dermatological treatments tailored to your needs.</p>
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="images/service-1.png" alt="Facial">
+          <div class="service-body">
+            <h4>Facial</h4>
+            <p>Restore and rejuvenate your skin with our comprehensive facial treatments, including microneedling, chemical peeling, whitening services, Cosmelan Peel, and our exclusive 3-in-1 Synergistic Treatment for a radiant, healthy complexion.</p>
+            <span class="read-more">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/service-2.png" alt="Injections & Fillers">
+          <div class="service-body">
+            <h4>Injections & Fillers</h4>
+            <p>Enhance your natural features with our advanced injection and filler services, including neurotoxins, HA fillers, biostimulators, mesotherapy, and Belotero Revive for smooth, natural-looking results.</p>
+            <span class="read-more">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/service-3.png" alt="Ultherapy Prime">
+          <div class="service-body">
+            <h4>Ultherapy Prime</h4>
+            <p>Experience non-surgical lifting and tightening with Ultherapy Prime. We also offer hair restoration, tattoo removal, skin lesion removal, and other doctor-led procedures for comprehensive care.</p>
+            <span class="read-more">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/service-4.png" alt="Weight Loss">
+          <div class="service-body">
+            <h4>Weight Loss</h4>
+            <p>Achieve your wellness goals with our weight loss programs, including slimming services, body contouring, mesolipo therapy, and Slimshot / Tirzepatide treatments tailored to your needs.</p>
+            <span class="read-more">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/service-5.png" alt="Hair Restoration">
+          <div class="service-body">
+            <h4>Hair Restoration</h4>
+            <p>Regain your confidence with our hair restoration solutions, including doctor consultations, special treatments, glutathione services, and Enhance NAD+ Drip for optimal results.</p>
+            <span class="read-more">Learn More →</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="images/service-6.png" alt="Nails, Lash, Brow Services">
+          <div class="service-body">
+            <h4>Nails, Lash, Brow Services</h4>
+            <p>Complete your look with our nail services, lash services, brow lamination, and hair removal services designed to enhance your natural beauty with precision and care.</p>
+            <span class="read-more">Learn More →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // ---------- MOBILE MENU ----------
-        const hamburger = document.getElementById('hamburger');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const mobileMenuClose = document.getElementById('mobileMenuClose');
+  <!-- ========== WHY CHOOSE US ========== -->
+  <section style="background: white; padding: 60px 0;">
+    <div class="container section-animate" id="whyAnim">
+      <span class="section-tag">Why Choose Us</span>
+      <h2 class="font-playfair">Experience Radiant Skin</h2>
+      <div class="why-grid">
+        <div class="why-card"><img src="images/why-1.jpg" alt="Why Choose Enhance Clinic"></div>
+        <div class="why-card"><img src="images/why-2.jpg" alt="Why Choose Enhance Clinic"></div>
+        <div class="why-card"><img src="images/why-3.jpg" alt="Why Choose Enhance Clinic"></div>
+      </div>
+    </div>
+  </section>
 
-        hamburger.addEventListener('click', function() {
-            mobileMenu.classList.add('open');
-            document.body.style.overflow = 'hidden';
-        });
+  <!-- ========== IMAGE LIGHTBOX ========== -->
+  <div class="lightbox" id="imageLightbox">
+    <button class="lightbox-close" id="imageLightboxClose"><i class="fas fa-times"></i></button>
+    <img id="lightboxImage" src="" alt="Full screen image">
+  </div>
 
-        mobileMenuClose.addEventListener('click', function() {
-            mobileMenu.classList.remove('open');
-            document.body.style.overflow = '';
-        });
+  <!-- ========== PROMO BANNER ========== -->
+  <section class="promo-banner">
+    <div class="container section-animate" id="promoAnim">
+      <h2 class="font-playfair">Elevate Your Confidence.</h2>
+      <p>Feel empowered. Feel like the best version of yourself.</p>
+      <a href="#" class="btn-primary" style="background: white; color: var(--primary);">Book Consultation</a>
+    </div>
+  </section>
 
-        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.remove('open');
-                document.body.style.overflow = '';
-            });
-        });
+  <!-- ========== DOCTORS ========== -->
+  <section id="doctors" style="background: white;">
+    <div class="container section-animate" id="doctorsAnim">
+      <span class="section-tag">Our Team</span>
+      <h2 class="font-playfair">Meet Our Professionals</h2>
+      <div class="doctors-grid">
+        <div class="doctor-card"><img src="images/drjerome.png" alt="Doctor"><h4>Dr. Niño Jerome Joaquim Vanguardia</h4><p>Hair Transplant Surgeon · Aesthetic Physician</p></div>
+        <div class="doctor-card"><img src="images/drize.png" alt="Doctor"><h4>Dr. Mary Partize L. Gonzales-Vanguardia</h4><p>Aesthetic Dermatology</p></div>
+        <div class="doctor-card"><img src="images/draleli.png" alt="Doctor"><h4>Dr. Aleli Abad</h4><p>Aesthetic Physician</p></div>
+      </div>
+    </div>
+  </section>
 
-        // ---------- IMAGE LIGHTBOX ----------
-        const imageLightbox = document.getElementById('imageLightbox');
-        const lightboxImage = document.getElementById('lightboxImage');
-        const imageLightboxClose = document.getElementById('imageLightboxClose');
+  <!-- ========== REELS + BEFORE/AFTER ========== -->
+  <section id="reels">
+    <div class="container section-animate" id="reelsAnim">
+      <span class="section-tag">Instagram Reels</span>
+      <h2 class="font-playfair">Real Stories, Real Results</h2>
+      <p class="section-sub">Watch real transformations and experiences from our patients.</p>
+      <div class="reels-grid">
+        <div class="reel-card">
+          <div class="video-wrapper"><iframe src="https://www.instagram.com/reel/DYH0WfMhGTG/embed" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reel-info"><h4>Weight Loss Journey</h4><p>Witness the weight loss journey of Doc Lorenzo with Enhance Clinic.</p><a href="https://www.instagram.com/reel/DYH0WfMhGTG/" target="_blank" class="reel-link">View on Instagram →</a></div>
+        </div>
+        <div class="reel-card">
+          <div class="video-wrapper"><iframe src="https://www.instagram.com/reel/DaE6g7vhObV/embed" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reel-info"><h4>Ultherapy PRIME</h4><p>Watch Dr. Ize perform the next-generation ultrasound lifting treatment.</p><a href="https://www.instagram.com/reel/DaE6g7vhObV/" target="_blank" class="reel-link">View on Instagram →</a></div>
+        </div>
+        <div class="reel-card">
+          <div class="video-wrapper"><iframe src="https://www.instagram.com/reel/DbfJUQVhIrZ/embed" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reel-info"><h4>PDRN Facial</h4><p>Ms. Kayne shares her experience with our PDRN Facial treatment.</p><a href="https://www.instagram.com/reel/DbfJUQVhIrZ/" target="_blank" class="reel-link">View on Instagram →</a></div>
+        </div>
+        <div class="reel-card">
+          <div class="video-wrapper"><iframe src="https://www.instagram.com/reel/DbMvD0UijxA/embed" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reel-info"><h4>Sculptra Journey</h4><p>"The goal isn't to look younger. It is to look like the best version of myself."</p><a href="https://www.instagram.com/reel/DbMvD0UijxA/" target="_blank" class="reel-link">View on Instagram →</a></div>
+        </div>
+        <div class="reel-card">
+          <div class="video-wrapper"><iframe src="https://www.instagram.com/reel/DVDWE35gXd0/embed" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reel-info"><h4>A Little Secret Glow</h4><p>A little secret glow for a special surprise. Sometimes, the best surprises aren't wrapped, they're felt in your confidence. With Profhilo, your skin becomes smoother, firmer, and deeply hydrated.</p><a href="https://www.instagram.com/reel/DVDWE35gXd0/" target="_blank" class="reel-link">View on Instagram →</a></div>
+        </div>
+        <div class="reel-card">
+          <div class="video-wrapper"><iframe src="https://www.instagram.com/reel/DbKAp1jiOde/embed" allowfullscreen loading="lazy"></iframe></div>
+          <div class="reel-info"><h4>PRP Mesotherapy for Hair</h4><p>Dr. Jerome performs PRP Mesotherapy via the U225 injector for hair regrowth.</p><a href="https://www.instagram.com/reel/DbKAp1jiOde/" target="_blank" class="reel-link">View on Instagram →</a></div>
+        </div>
+      </div>
+      <div class="ba-grid">
+        <div class="ba-card"><img src="images/ba-1.jpg" alt="Before & After 1"></div>
+        <div class="ba-card"><img src="images/ba-2.jpg" alt="Before & After 2"></div>
+        <div class="ba-card"><img src="images/ba-3.jpg" alt="Before & After 3"></div>
+        <div class="ba-card"><img src="images/ba-4.jpg" alt="Before & After 4"></div>
+        <div class="ba-card"><img src="images/ba-5.jpg" alt="Before & After 5"></div>
+        <div class="ba-card"><img src="images/ba-6.jpg" alt="Before & After 6"></div>
+        <div class="ba-card"><img src="images/ba-7.jpg" alt="Before & After 7"></div>
+        <div class="ba-card"><img src="images/ba-8.jpg" alt="Before & After 8"></div>
+      </div>
+    </div>
+  </section>
 
-        document.querySelectorAll('.ba-card img').forEach(img => {
-            img.addEventListener('click', function(e) {
-                e.stopPropagation();
-                lightboxImage.src = this.src;
-                lightboxImage.alt = this.alt || 'Full screen image';
-                imageLightbox.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-        });
+  <!-- ========== BRANDS MARQUEE ========== -->
+  <section class="brands-marquee">
+    <div class="marquee-wrapper">
+      <div class="marquee-track" id="marqueeTrack">
+        <div class="marquee-item"><img src="images/brands/brand-1.png" alt="Brand 1"></div>
+        <div class="marquee-item"><img src="images/brands/brand-2.png" alt="Brand 2"></div>
+        <div class="marquee-item"><img src="images/brands/brand-3.png" alt="Brand 3"></div>
+        <div class="marquee-item"><img src="images/brands/brand-4.png" alt="Brand 4"></div>
+        <div class="marquee-item"><img src="images/brands/brand-5.png" alt="Brand 5"></div>
+        <div class="marquee-item"><img src="images/brands/brand-6.png" alt="Brand 6"></div>
+        <div class="marquee-item"><img src="images/brands/brand-7.png" alt="Brand 7"></div>
+        <div class="marquee-item"><img src="images/brands/brand-8.png" alt="Brand 8"></div>
+        <div class="marquee-item"><img src="images/brands/brand-9.png" alt="Brand 9"></div>
+        <div class="marquee-item"><img src="images/brands/brand-1.png" alt="Brand 1"></div>
+        <div class="marquee-item"><img src="images/brands/brand-2.png" alt="Brand 2"></div>
+        <div class="marquee-item"><img src="images/brands/brand-3.png" alt="Brand 3"></div>
+        <div class="marquee-item"><img src="images/brands/brand-4.png" alt="Brand 4"></div>
+        <div class="marquee-item"><img src="images/brands/brand-5.png" alt="Brand 5"></div>
+        <div class="marquee-item"><img src="images/brands/brand-6.png" alt="Brand 6"></div>
+        <div class="marquee-item"><img src="images/brands/brand-7.png" alt="Brand 7"></div>
+        <div class="marquee-item"><img src="images/brands/brand-8.png" alt="Brand 8"></div>
+        <div class="marquee-item"><img src="images/brands/brand-9.png" alt="Brand 9"></div>
+      </div>
+    </div>
+  </section>
 
-        imageLightboxClose.addEventListener('click', function() {
-            imageLightbox.classList.remove('open');
-            document.body.style.overflow = '';
-        });
+  <!-- ========== FAQ ========== -->
+  <section id="faq" style="background: white;">
+    <div class="container section-animate" id="faqAnim">
+      <span class="section-tag">FAQ</span>
+      <h2 class="font-playfair">Frequently Asked Questions</h2>
+      <div class="faq-grid">
+        <div class="faq-item active"><div class="faq-question">What happens during my first consultation? <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p>Your consultation includes a personalized assessment with our doctor. We'll discuss your concerns, goals, medical history, and recommend the most suitable treatment plan for you.</p></div></div>
+        <div class="faq-item"><div class="faq-question">How do I know which treatment is right for me? <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p>Every patient is unique. During your consultation, our doctor will evaluate your concerns and recommend treatments based on your needs, lifestyle, and desired results.</p></div></div>
+        <div class="faq-item"><div class="faq-question">Are your treatments safe? <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p>Yes. All procedures are performed by trained medical professionals using clinically recognized techniques and high-quality products.</p></div></div>
+        <div class="faq-item"><div class="faq-question">Is there any downtime after treatment? <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p>Downtime varies depending on the procedure. Many treatments have little to no downtime, while some advanced procedures may require a few days of recovery.</p></div></div>
+        <div class="faq-item"><div class="faq-question">When will I see results? <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p>Some treatments provide noticeable improvements within days, while others gradually enhance your appearance over several weeks or months.</p></div></div>
+        <div class="faq-item"><div class="faq-question">Ultherapy Prime <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p><strong>What is Ultherapy Prime?</strong><br>Non-surgical ultrasound treatment to lift and tighten skin by stimulating natural collagen production.</p><p><strong>Which areas can be treated?</strong><br>Face, neck, and under the chin.</p><p><strong>How soon will I see results?</strong><br>Initial improvement is noticeable, with full results developing over the following months.</p><button class="watch-video-btn" data-video="https://www.instagram.com/reel/DXGEw0ygXvE/embed">Watch Video</button></div></div>
+        <div class="faq-item"><div class="faq-question">Sculptra <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p><strong>What is Sculptra?</strong><br>Injectable treatment that restores facial volume by stimulating natural collagen production.</p><p><strong>How long do results last?</strong><br>Results develop over months and may last up to two years or longer.</p><p><strong>Is Sculptra painful?</strong><br>Most patients experience only mild discomfort with numbing options available.</p><button class="watch-video-btn" data-video="https://www.instagram.com/reel/DZMaLbpBw1u/embed">Watch Video</button></div></div>
+        <div class="faq-item"><div class="faq-question">Profhilo Structura <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p><strong>What is Profhilo Structura?</strong><br>Injectable treatment that improves facial structure, skin quality, and firmness.</p><p><strong>Who is a good candidate?</strong><br>Adults with facial volume changes, skin laxity, or early signs of aging.</p><p><strong>How many sessions?</strong><br>Varies per patient. Your doctor will create a personalized plan.</p><button class="watch-video-btn" data-video="https://www.instagram.com/reel/DY6DH89B97m/embed">Watch Video</button></div></div>
+        <div class="faq-item"><div class="faq-question">BioRePeel <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p><strong>What is BioRePeel?</strong><br>Chemical peel that exfoliates skin while improving texture, acne, and fine lines.</p><p><strong>Will my skin peel?</strong><br>Some patients experience minimal peeling, others may have none at all.</p><p><strong>Can I return to work?</strong><br>Yes. Most patients resume normal activities shortly after treatment.</p><button class="watch-video-btn" data-video="https://www.instagram.com/reel/DYopx-1hdlK/embed">Watch Video</button></div></div>
+        <div class="faq-item"><div class="faq-question">Restylane <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p><strong>What is Restylane?</strong><br>Dermal filler that restores facial volume and softens wrinkles and folds.</p><p><strong>How long do fillers last?</strong><br>Results typically last several months, depending on the treatment area.</p><p><strong>Will I look natural?</strong><br>Yes. Our goal is balanced, natural-looking enhancements.</p><button class="watch-video-btn" data-video="https://www.instagram.com/reel/DYv3tnDBrVm/embed">Watch Video</button></div></div>
+        <div class="faq-item"><div class="faq-question">Tirzepatide <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p><strong>What is Tirzepatide?</strong><br>Prescription medication for medically supervised weight management programs.</p><p><strong>Is it suitable for everyone?</strong><br>No. Eligibility depends on medical history and doctor's assessment.</p><p><strong>Do I still need diet and exercise?</strong><br>Yes. Healthy habits remain important for achieving the best results.</p><button class="watch-video-btn" data-video="https://www.instagram.com/reel/DXhDXyEAct0/embed">Watch Video</button></div></div>
+        <div class="faq-item"><div class="faq-question">Nourkrin <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p><strong>What is Nourkrin?</strong><br>Clinically researched supplement that supports hair growth and improves hair quality.</p><p><strong>Who is it suitable for?</strong><br>Individuals experiencing hair thinning or looking to support healthier hair growth.</p><button class="watch-video-btn" data-video="https://www.instagram.com/reel/DWNgQingVZ7/embed">Watch Video</button></div></div>
+        <div class="faq-item"><div class="faq-question">Profhilo <i class="fas fa-chevron-down"></i></div><div class="faq-answer"><p><strong>What is Profhilo?</strong><br>Skin remodelling treatment that improves laxity, hydration, and overall skin quality.</p><p><strong>How many sessions?</strong><br>Typically two sessions, spaced about a month apart.</p><button class="watch-video-btn" data-video="https://www.instagram.com/reel/DWGhmDaARrv/embed">Watch Video</button></div></div>
+      </div>
+    </div>
+  </section>
 
-        imageLightbox.addEventListener('click', function(e) {
-            if (e.target === imageLightbox) {
-                imageLightbox.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
+  <!-- ========== VIDEO LIGHTBOX ========== -->
+  <div class="video-lightbox" id="videoLightbox">
+    <div class="video-lightbox-content">
+      <button class="video-lightbox-close" id="videoLightboxClose"><i class="fas fa-times"></i></button>
+      <div class="video-wrapper" id="videoWrapper">
+        <iframe id="videoIframe" src="" allowfullscreen loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && imageLightbox.classList.contains('open')) {
-                imageLightbox.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
+  <!-- ========== TESTIMONIALS ========== -->
+  <section id="testimonials">
+    <div class="container section-animate" id="testimonialsAnim">
+      <span class="section-tag">Testimonials</span>
+      <h2 class="font-playfair">What Our Clients Say</h2>
+      <p class="section-sub">Real stories from real people who trusted Enhance Clinic.</p>
+      <div class="testimonial-carousel">
+        <div class="testimonial-track" id="testimonialTrack">
+          <div class="testimonial-slide"><div class="testimonial-item"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"I've had a great experience with Enhance so far! The staff are always warm, professional, and accommodating, they make every visit feel comfortable and smooth. Doc Ize is very knowledgeable and approachable, and I really appreciate how she takes the time to explain things thoroughly. The place itself is clean, relaxing, and well-maintained, definitely gives off a welcoming and professional vibe. Highly recommended!"</p><h5>— Justine M.</h5></div></div>
+          <div class="testimonial-slide"><div class="testimonial-item"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"I just want to give an update with my slimshot journey. I came in last August 16, weighing 67kgs. And today, September 13, I'm currently at 60kgs. No symptoms at all. At first, I was a little scared kasi baka biglaan symptoms. Ang galing kasi akala ko it wouldn't work since I'm diabetic and I have PCOS for 7 years."</p><h5>— Slimshot Patient</h5></div></div>
+          <div class="testimonial-slide"><div class="testimonial-item"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"Thank you doc and enhance team! Just 1 and half month on slimshot, I lost 10kg. Nawala na yung 'cortisol face' ko caused by PCOS. Never thought I could lose this much weight after giving birth and having PCOS."</p><h5>— Slimshot Patient</h5></div></div>
+          <div class="testimonial-slide"><div class="testimonial-item"><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p>"Doc thank you for my fillers and Jaw tox sobrang gandaaa. No bruising po. Excited na po ako ulit sa next treatment."</p><h5>— Fillers & Jaw Tox Patient</h5></div></div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prevTestimonial"><i class="fas fa-chevron-left"></i></button>
+          <div class="carousel-dots" id="testimonialDots"></div>
+          <button class="carousel-btn" id="nextTestimonial"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // ---------- FAQ ACCORDION (ONLY ONE OPEN AT A TIME) ----------
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.querySelector('.faq-question').addEventListener('click', function() {
-                document.querySelectorAll('.faq-item').forEach(otherItem => {
-                    if (otherItem !== item) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                item.classList.toggle('active');
-            });
-        });
+  <!-- ========== CONTACT ========== -->
+  <section id="contact" style="background: white;">
+    <div class="container section-animate" id="contactAnim">
+      <span class="section-tag">Contact</span>
+      <h2 class="font-playfair">Get in Touch</h2>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p><i class="fas fa-location-dot"></i> Unit 22 Bridgepoint Bldg., 2nd Floor, Brgy. Anastacia, Sto. Tomas, Batangas</p>
+          <p><i class="fas fa-map-pin"></i> Waze: Enhance by Doc Ize</p>
+          <p><i class="fas fa-phone"></i> 0976-487-5779</p>
+          <p><i class="far fa-calendar-alt"></i> Tuesday–Sunday · 10AM – 8PM</p>
+       <!--   <p><i class="fas fa-envelope"></i> hello@enhanceclinic.com</p> -->
+          <div style="margin-top: 20px; border-radius: 12px; overflow: hidden; height: 200px; background: #e0d6cc;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3868.247146957572!2d121.16113491483994!3d14.179326590294798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339bd7e4b7f6b1a1%3A0x8b9e8b7f1c8b7f1c!2sSto.%20Tomas%20Batangas!5e0!3m2!1sen!2sph!4v1650000000000" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="contact-image">
+          <img src="images/getintouch.png" alt="Get in touch with Enhance Clinic">
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // ---------- VIDEO LIGHTBOX ----------
-        const videoLightbox = document.getElementById('videoLightbox');
-        const videoIframe = document.getElementById('videoIframe');
-        const videoLightboxClose = document.getElementById('videoLightboxClose');
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="images/logo.png" alt="ENHANCE CLINIC" class="footer-logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<h4>ENHANCE CLINIC</h4>'">
+          <p style="opacity:0.7; max-width:260px; margin-top:8px;">Premium aesthetic care. Where science meets confidence.</p>
+          <div class="social" style="margin-top: 12px;">
+            <a href="https://www.facebook.com/enhanceclinic" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.instagram.com/enhanceclinicph" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://m.me/enhanceclinic" target="_blank" aria-label="Messenger"><i class="fab fa-facebook-messenger"></i></a>
+            <a href="https://www.canva.com/design/DAG_VGCY_lg/IXNSyA1zcxhDLqhbVI8sBw/view?utlId=h5c528e7456#1" target="_blank" aria-label="Price List"><i class="fas fa-tag"></i></a>
+          </div>
+        </div>
+        <div><h4>Quick Links</h4><a href="#">Home</a><br><a href="#about">About</a><br><a href="#services">Services</a><br><a href="#reels">Reels</a></div>
+        <div><h4>Services</h4><a href="#">Facial</a><br><a href="#">Injections</a><br><a href="#">Ultherapy Prime</a><br><a href="#">Weight Loss</a><br><a href="#">Hair Restoration</a></div>
+        <div><h4>Contact</h4><p style="opacity:0.7;"><i class="fas fa-phone"></i> 0976-487-5779</p><p style="opacity:0.7;"><i class="far fa-clock"></i> Tues–Sun 10AM–8PM</p><p style="opacity:0.7;"><i class="fas fa-map-pin"></i> Sto. Tomas, Batangas</p></div>
+      </div>
+      <div class="footer-bottom">© 2026 ENHANCE CLINIC. All rights reserved.</div>
+    </div>
+  </footer>
 
-        document.querySelectorAll('.watch-video-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const videoUrl = this.getAttribute('data-video');
-                videoIframe.src = videoUrl;
-                videoLightbox.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            });
-        });
+  <script>
+// ---------- STICKY NAV ----------
+window.addEventListener('scroll', function() {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
 
-        videoLightboxClose.addEventListener('click', function() {
-            videoLightbox.classList.remove('open');
-            videoIframe.src = '';
-            document.body.style.overflow = '';
-        });
+// ---------- MOBILE MENU (FIXED - WORKS RELIABLY) ----------
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-        videoLightbox.addEventListener('click', function(e) {
-            if (e.target === videoLightbox) {
-                videoLightbox.classList.remove('open');
-                videoIframe.src = '';
-                document.body.style.overflow = '';
-            }
-        });
+// Open menu
+function openMobileMenu() {
+  mobileMenu.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && videoLightbox.classList.contains('open')) {
-                videoLightbox.classList.remove('open');
-                videoIframe.src = '';
-                document.body.style.overflow = '';
-            }
-        });
+// Close menu
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
 
-        // ---------- TESTIMONIALS CAROUSEL ----------
-        const track = document.getElementById('testimonialTrack');
-        const slides = track.querySelectorAll('.testimonial-slide');
-        const dotsContainer = document.getElementById('testimonialDots');
-        const prevBtn = document.getElementById('prevTestimonial');
-        const nextBtn = document.getElementById('nextTestimonial');
+// Hamburger click
+hamburger.addEventListener('click', function(e) {
+  e.stopPropagation();
+  e.preventDefault();
+  openMobileMenu();
+});
 
-        let currentIndex = 0;
-        const totalSlides = slides.length;
+// Close button click - FIXED
+mobileMenuClose.addEventListener('click', function(e) {
+  e.stopPropagation();
+  e.preventDefault();
+  closeMobileMenu();
+});
 
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('button');
-            dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
-            dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
-            dot.addEventListener('click', () => {
-                goToSlide(i);
-            });
-            dotsContainer.appendChild(dot);
-        }
+// Close when clicking on a nav link
+document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+  link.addEventListener('click', function() {
+    closeMobileMenu();
+  });
+});
 
-        function goToSlide(index) {
-            currentIndex = index;
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
-            updateDots();
-        }
+// Close when clicking outside the menu content (on the overlay background)
+mobileMenu.addEventListener('click', function(e) {
+  if (e.target === mobileMenu) {
+    closeMobileMenu();
+  }
+});
 
-        function updateDots() {
-            const dots = dotsContainer.querySelectorAll('.carousel-dot');
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-        }
+// Close with Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+    closeMobileMenu();
+  }
+});
 
-        function nextSlide() {
-            currentIndex = (currentIndex + 1) % totalSlides;
-            goToSlide(currentIndex);
-        }
+// ---------- FLOATING SOCIAL TOGGLE (arrow icon) ----------
+const socialIcons = document.getElementById('socialIcons');
+const toggleBtn = document.getElementById('socialToggle');
+const toggleIcon = document.getElementById('toggleIcon');
+let socialHidden = false;
 
-        function prevSlide() {
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-            goToSlide(currentIndex);
-        }
+toggleBtn.addEventListener('click', function() {
+  socialHidden = !socialHidden;
+  socialIcons.classList.toggle('hidden', socialHidden);
+  toggleIcon.className = socialHidden ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
+});
 
-        prevBtn.addEventListener('click', prevSlide);
-        nextBtn.addEventListener('click', nextSlide);
+// ---------- IMAGE LIGHTBOX ----------
+const imageLightbox = document.getElementById('imageLightbox');
+const lightboxImage = document.getElementById('lightboxImage');
+const imageLightboxClose = document.getElementById('imageLightboxClose');
 
-        let autoPlayInterval = setInterval(nextSlide, 8000);
+document.querySelectorAll('.ba-card img').forEach(img => {
+  img.addEventListener('click', function(e) {
+    e.stopPropagation();
+    lightboxImage.src = this.src;
+    lightboxImage.alt = this.alt || 'Full screen image';
+    imageLightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
 
-        const carousel = document.querySelector('.testimonial-carousel');
-        carousel.addEventListener('mouseenter', () => {
-            clearInterval(autoPlayInterval);
-        });
-        carousel.addEventListener('mouseleave', () => {
-            autoPlayInterval = setInterval(nextSlide, 8000);
-        });
+imageLightboxClose.addEventListener('click', function() {
+  imageLightbox.classList.remove('open');
+  document.body.style.overflow = '';
+});
 
-        // ---------- SECTION ANIMATIONS ----------
-        const animatedSections = document.querySelectorAll('.section-animate');
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -30px 0px'
-        });
-        animatedSections.forEach(section => {
-            sectionObserver.observe(section);
-        });
+imageLightbox.addEventListener('click', function(e) {
+  if (e.target === imageLightbox) {
+    imageLightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
 
-        // ---------- SMOOTH SCROLL ----------
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href === '#') return;
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && imageLightbox.classList.contains('open')) {
+    imageLightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
 
-        console.log('✨ ENHANCE CLINIC · premium aesthetic care');
-    </script>
+// ---------- FAQ ACCORDION ----------
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-question').addEventListener('click', function() {
+    document.querySelectorAll('.faq-item').forEach(otherItem => {
+      if (otherItem !== item) otherItem.classList.remove('active');
+    });
+    item.classList.toggle('active');
+  });
+});
+
+// ---------- VIDEO LIGHTBOX ----------
+const videoLightbox = document.getElementById('videoLightbox');
+const videoIframe = document.getElementById('videoIframe');
+const videoLightboxClose = document.getElementById('videoLightboxClose');
+
+document.querySelectorAll('.watch-video-btn').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    const videoUrl = this.getAttribute('data-video');
+    videoIframe.src = videoUrl;
+    videoLightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+videoLightboxClose.addEventListener('click', function() {
+  videoLightbox.classList.remove('open');
+  videoIframe.src = '';
+  document.body.style.overflow = '';
+});
+
+videoLightbox.addEventListener('click', function(e) {
+  if (e.target === videoLightbox) {
+    videoLightbox.classList.remove('open');
+    videoIframe.src = '';
+    document.body.style.overflow = '';
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && videoLightbox.classList.contains('open')) {
+    videoLightbox.classList.remove('open');
+    videoIframe.src = '';
+    document.body.style.overflow = '';
+  }
+});
+
+// ---------- TESTIMONIALS CAROUSEL ----------
+const track = document.getElementById('testimonialTrack');
+const slides = track.querySelectorAll('.testimonial-slide');
+const dotsContainer = document.getElementById('testimonialDots');
+const prevBtn = document.getElementById('prevTestimonial');
+const nextBtn = document.getElementById('nextTestimonial');
+
+let currentIndex = 0;
+const totalSlides = slides.length;
+
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement('button');
+  dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+  dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
+  dot.addEventListener('click', () => goToSlide(i));
+  dotsContainer.appendChild(dot);
+}
+
+function goToSlide(index) {
+  currentIndex = index;
+  track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  updateDots();
+}
+
+function updateDots() {
+  const dots = dotsContainer.querySelectorAll('.carousel-dot');
+  dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+}
+
+function nextSlide() { currentIndex = (currentIndex + 1) % totalSlides; goToSlide(currentIndex); }
+function prevSlide() { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; goToSlide(currentIndex); }
+
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+let autoPlayInterval = setInterval(nextSlide, 8000);
+const carousel = document.querySelector('.testimonial-carousel');
+carousel.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+carousel.addEventListener('mouseleave', () => { autoPlayInterval = setInterval(nextSlide, 8000); });
+
+// ---------- SECTION ANIMATIONS ----------
+const animatedSections = document.querySelectorAll('.section-animate');
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+animatedSections.forEach(section => sectionObserver.observe(section));
+
+// ---------- SMOOTH SCROLL ----------
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (href === '#') return;
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+console.log('✨ ENHANCE CLINIC · premium aesthetic care');
+  </script>
 </body>
 </html>
