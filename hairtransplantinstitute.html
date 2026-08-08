@@ -208,7 +208,7 @@
             left: 0;
             width: 100%;
             height: 100vh;
-            background: var(--white); /* white background */
+            background: var(--white);
             z-index: 998;
             justify-content: center;
             align-items: center;
@@ -225,7 +225,7 @@
             gap: 2.2rem;
         }
         .mobile-menu-overlay .mobile-nav-links a {
-            color: var(--text-dark); /* dark text for contrast */
+            color: var(--text-dark);
             font-size: 1.8rem;
             font-weight: 400;
             transition: 0.2s;
@@ -251,17 +251,31 @@
             color: var(--accent);
         }
 
-        /* ---------- FLOATING SOCIAL ---------- */
-        .floating-social {
+        /* ---------- FLOATING SOCIAL (with wrapper and toggle) ---------- */
+        .floating-social-wrapper {
             position: fixed;
             right: 24px;
             bottom: 120px;
             z-index: 100;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .floating-social {
+            display: flex;
+            flex-direction: column;
             gap: 12px;
             align-items: center;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
+        .floating-social.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(30px);
+        }
+
         .floating-social a {
             display: flex;
             align-items: center;
@@ -275,11 +289,13 @@
             transition: var(--transition);
             box-shadow: 0 4px 16px rgba(15, 43, 61, 0.2);
             border: 2px solid rgba(255,255,255,0.08);
+            opacity: 0.7;
         }
         .floating-social a:hover {
             transform: scale(1.12) translateX(-4px);
             background: var(--accent);
             color: white;
+            opacity: 1;
         }
         .floating-social a.messenger { background: #0084ff; }
         .floating-social a.instagram { background: #E4405F; }
@@ -294,10 +310,36 @@
             background: white;
             padding: 2px 8px;
             border-radius: 20px;
-            margin-top: 3px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             white-space: nowrap;
             font-family: 'Space Grotesk', sans-serif;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .floating-social-wrapper:hover .pricelist-label {
+            opacity: 1;
+        }
+
+        .social-toggle-btn {
+            background: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: var(--primary);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 4px;
+        }
+        .social-toggle-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
         }
 
         /* ============================================================
@@ -338,7 +380,7 @@
         .hero-content .hero-logo {
             max-width: 200px;
             margin-bottom: 1.8rem;
-			   filter: brightness(0) invert(1);
+            filter: brightness(0) invert(1);
         }
 
         .hero-content .badge {
@@ -642,7 +684,7 @@
 
         .reel-card .reel-wrapper {
             position: relative;
-            padding-bottom: 120%; /* taller aspect ratio */
+            padding-bottom: 120%;
             background: #1a1a1a;
             overflow: hidden;
         }
@@ -950,7 +992,6 @@
         }
 
         @media (max-width: 768px) {
-            /* Nav: hamburger right, no logo, center on desktop */
             .navbar .logo {
                 display: none !important;
             }
@@ -992,7 +1033,7 @@
             .reels-grid { grid-template-columns: 1fr 1fr; }
             .solutions-grid { grid-template-columns: 1fr 1fr; }
             .ba-grid { grid-template-columns: 1fr 1fr; }
-            .floating-social { right: 12px; }
+            .floating-social-wrapper { right: 12px; }
             .floating-social a { width: 40px; height: 40px; font-size: 1rem; }
             .faq-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
@@ -1010,8 +1051,9 @@
             .reels-grid { grid-template-columns: 1fr; }
             .solutions-grid { grid-template-columns: 1fr; }
             .ba-grid { grid-template-columns: 1fr 1fr; }
-            .floating-social { right: 10px; bottom: 90px; gap: 10px; }
+            .floating-social-wrapper { right: 10px; bottom: 90px; }
             .floating-social a { width: 36px; height: 36px; font-size: 0.9rem; }
+            .floating-social { gap: 10px; }
             .faq-question { font-size: 0.8rem; padding: 12px 14px; }
             .faq-answer { font-size: 0.75rem; padding: 0 14px 12px; }
             .lightbox-close { font-size: 1.6rem; top: 15px; right: 15px; }
@@ -1024,21 +1066,26 @@
 </head>
 <body>
 
-    <!-- ========== FLOATING SOCIAL ========== -->
-    <div class="floating-social">
-        <a href="https://www.facebook.com/profile.php?id=61572015235058" class="messenger" target="_blank" aria-label="Messenger">
-            <i class="fab fa-facebook-messenger"></i>
-        </a>
-        <a href="https://www.instagram.com/enhanceclinichairandsurgery" class="instagram" target="_blank" aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=61572015235058" class="facebook" target="_blank" aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://www.canva.com/design/DAG_VGCY_lg/IXNSyA1zcxhDLqhbVI8sBw/view?utlId=h5c528e7456#1" class="pricelist" target="_blank" aria-label="Price List">
-            <i class="fas fa-tag"></i>
-        </a>
-        <span class="pricelist-label">Price List</span>
+    <!-- ========== FLOATING SOCIAL (with wrapper and toggle) ========== -->
+    <div class="floating-social-wrapper" id="socialWrapper">
+        <div class="floating-social" id="socialIcons">
+            <a href="https://m.me/enhancehairtransplantinstitute" class="messenger" target="_blank" aria-label="Messenger">
+                <i class="fab fa-facebook-messenger"></i>
+            </a>
+            <a href="https://www.instagram.com/enhanceclinichairandsurgery" class="instagram" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/enhancehairtransplantinstitute" class="facebook" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.canva.com/design/DAG_VGCY_lg/IXNSyA1zcxhDLqhbVI8sBw/view?utlId=h5c528e7456#1" class="pricelist" target="_blank" aria-label="Price List">
+                <i class="fas fa-tag"></i>
+            </a>
+            <span class="pricelist-label">Price List</span>
+        </div>
+        <button class="social-toggle-btn" id="socialToggle" aria-label="Toggle social icons">
+            <i class="fas fa-chevron-right" id="toggleIcon"></i>
+        </button>
     </div>
 
     <!-- ========== MOBILE MENU (full screen, white background) ========== -->
@@ -1053,7 +1100,6 @@
             <a href="#solutions">Treatments</a>
             <a href="#faq">FAQ</a>
             <a href="#contact">Contact</a>
-            <!-- Book Consultation link removed from mobile menu -->
         </div>
     </div>
 
@@ -1069,7 +1115,6 @@
                 <a href="#solutions">Treatments</a>
                 <a href="#faq">FAQ</a>
                 <a href="#contact">Contact</a>
-                <!-- Book Consultation link removed from desktop nav -->
             </div>
         </div>
     </nav>
@@ -1081,9 +1126,9 @@
         <div class="container">
             <div class="hero-content section-animate visible">
                 <img src="hair/logo-1.png" alt="ENHANCE CLINIC" class="hero-logo" onerror="this.style.display='none'">
-				  <div class="badge"> Hair Transplant Institute</div>
-            <h1 class="font-serif">First DHI Micrograft <br>Hair Transplant in South Luzon</h1>
-    <p>Dr. Niño Jerome Joaquim Vanguardia is a DHI specialist who combines precision, artistry, and advanced techniques to help you achieve natural, lasting results.</p>
+                <div class="badge"> Hair Transplant Institute</div>
+                <h1 class="font-serif">First DHI Micrograft <br>Hair Transplant in South Luzon</h1>
+                <p>Dr. Niño Jerome Joaquim Vanguardia is a DHI specialist who combines precision, artistry, and advanced techniques to help you achieve natural, lasting results.</p>
                 <div class="hero-btns">
                     <a href="https://www.facebook.com/profile.php?id=61572015235058" class="btn-primary">Book Consultation</a>
                     <a href="#about" class="btn-outline-light">Learn More</a>
@@ -1124,17 +1169,16 @@
                 </div>
                 <div>
                     <span class="section-tag">About</span>
-                  <h2 class="font-serif">Meet Dr. Niño Jerome Joaquim Vanguardia</h2>
-<p style="color: var(--text-muted); margin: 16px 0; font-family: 'Space Grotesk', sans-serif;">Dr. Jerome is a DHI Specialist, Hair Transplant Surgeon, and Aesthetic Physician. He is Internationally Trained in Thailand under the ISAAH (International Society of Aesthetics, Aging Control Medicine &amp; Hair Transplantation), mastering the latest techniques in hair restoration.</p>
-<p style="color: var(--text-muted); margin: 16px 0; font-family: 'Space Grotesk', sans-serif;">With a passion for natural-looking results, he combines surgical precision with an artistic eye, ensuring each patient receives a customized treatment plan tailored to their unique needs.</p>
-<div class="about-features">
-    <div class="about-feature"><i class="fas fa-user-md"></i> DHI Specialist</div>
-    <div class="about-feature"><i class="fas fa-microscope"></i> Hair Transplant Surgeon</div>
-    <div class="about-feature"><i class="fas fa-stethoscope"></i> Aesthetic Physician</div>
-    <div class="about-feature"><i class="fas fa-globe-asia"></i> Internationally Trained</div>
-    <div class="about-feature"><i class="fas fa-hand-holding-heart"></i> Personalized Care</div>
-    <div class="about-feature"><i class="fas fa-leaf"></i> Natural Results</div>
-</div>
+                    <h2 class="font-serif">Meet Dr. Niño Jerome Joaquim Vanguardia</h2>
+                    <p style="color: var(--text-muted); margin: 16px 0; font-family: 'Space Grotesk', sans-serif;">Dr. Jerome is a DHI Specialist, Hair Transplant Surgeon, and Aesthetic Physician. He is Internationally Trained in Thailand under the ISAAH (International Society of Aesthetics, Aging Control Medicine &amp; Hair Transplantation), mastering the latest techniques in hair restoration.</p>
+                    <p style="color: var(--text-muted); margin: 16px 0; font-family: 'Space Grotesk', sans-serif;">With a passion for natural-looking results, he combines surgical precision with an artistic eye, ensuring each patient receives a customized treatment plan tailored to their unique needs.</p>
+                    <div class="about-features">
+                        <div class="about-feature"><i class="fas fa-user-md"></i> DHI Specialist</div>
+                        <div class="about-feature"><i class="fas fa-microscope"></i> Hair Transplant Surgeon</div>
+                        <div class="about-feature"><i class="fas fa-stethoscope"></i> Aesthetic Physician</div>
+                        <div class="about-feature"><i class="fas fa-globe-asia"></i> Internationally Trained</div>
+                        <div class="about-feature"><i class="fas fa-hand-holding-heart"></i> Personalized Care</div>
+                        <div class="about-feature"><i class="fas fa-leaf"></i> Natural Results</div>
                     </div>
                 </div>
             </div>
@@ -1378,9 +1422,9 @@
                     <img src="hair/logo-1.png" alt="ENHANCE CLINIC" class="footer-logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<h4>ENHANCE CLINIC</h4>'">
                     <p style="opacity:0.8; max-width:260px; margin-top:8px;">Premium hair restoration. Where science meets confidence.</p>
                     <div class="social" style="margin-top: 14px;">
-                        <a href="https://www.facebook.com/profile.php?id=61572015235058" target="_blank"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/enhancehairtransplantinstitute" target="_blank"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/enhanceclinichairandsurgery" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/profile.php?id=61572015235058" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
+                        <a href="https://m.me/enhancehairtransplantinstitute" target="_blank"><i class="fab fa-facebook-messenger"></i></a>
                         <a href="https://www.canva.com/design/DAG_VGCY_lg/IXNSyA1zcxhDLqhbVI8sBw/view?utlId=h5c528e7456#1" target="_blank"><i class="fas fa-tag"></i></a>
                     </div>
                 </div>
@@ -1410,216 +1454,235 @@
     </footer>
 
     <script>
-// ---------- STICKY NAV ----------
-window.addEventListener('scroll', function() {
-    const nav = document.getElementById('navbar');
-    if (window.scrollY > 40) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-});
+        // ---------- STICKY NAV ----------
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 40) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        });
 
-// ---------- MOBILE MENU ----------
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-const mobileMenuClose = document.getElementById('mobileMenuClose');
+        // ---------- MOBILE MENU ----------
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
 
-// Debug: log elements to verify they exist
-console.log('hamburger:', hamburger);
-console.log('mobileMenu:', mobileMenu);
-console.log('mobileMenuClose:', mobileMenuClose);
+        function openMobileMenu() {
+            mobileMenu.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
 
-if (hamburger) {
-    hamburger.addEventListener('click', function() {
-        mobileMenu.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    });
-}
-
-if (mobileMenuClose) {
-    mobileMenuClose.addEventListener('click', function() {
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-    });
-}
-
-// Also close when clicking on the overlay background (outside the links)
-if (mobileMenu) {
-    mobileMenu.addEventListener('click', function(e) {
-        // Close if the click is directly on the overlay, not on a child element
-        if (e.target === mobileMenu) {
+        function closeMobileMenu() {
             mobileMenu.classList.remove('open');
             document.body.style.overflow = '';
         }
-    });
-}
 
-document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-    link.addEventListener('click', function() {
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-    });
-});
-
-// ---------- SECTION ANIMATIONS ----------
-const animatedSections = document.querySelectorAll('.section-animate, .stagger-children');
-const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+        if (hamburger) {
+            hamburger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openMobileMenu();
+            });
         }
-    });
-}, {
-    threshold: 0.08,
-    rootMargin: '0px 0px -30px 0px'
-});
-animatedSections.forEach(section => {
-    sectionObserver.observe(section);
-});
 
-// ---------- IMAGE LIGHTBOX ----------
-const imageLightbox = document.getElementById('imageLightbox');
-const lightboxImage = document.getElementById('lightboxImage');
-const imageLightboxClose = document.getElementById('imageLightboxClose');
+        if (mobileMenuClose) {
+            mobileMenuClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeMobileMenu();
+            });
+        }
 
-document.querySelectorAll('.solution-card img, .gallery-card img, .ba-card img').forEach(img => {
-    img.addEventListener('click', function(e) {
-        e.stopPropagation();
-        lightboxImage.src = this.src;
-        lightboxImage.alt = this.alt || 'Full screen image';
-        imageLightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    });
-});
+        if (mobileMenu) {
+            mobileMenu.addEventListener('click', function(e) {
+                if (e.target === mobileMenu) {
+                    closeMobileMenu();
+                }
+            });
+        }
 
-imageLightboxClose.addEventListener('click', function() {
-    imageLightbox.classList.remove('open');
-    document.body.style.overflow = '';
-});
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                closeMobileMenu();
+            });
+        });
 
-imageLightbox.addEventListener('click', function(e) {
-    if (e.target === imageLightbox) {
-        imageLightbox.classList.remove('open');
-        document.body.style.overflow = '';
-    }
-});
-
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && imageLightbox.classList.contains('open')) {
-        imageLightbox.classList.remove('open');
-        document.body.style.overflow = '';
-    }
-});
-
-// ---------- VIDEO CONTROLS (Play/Pause, Mute/Unmute, One at a time) ----------
-const allVideos = document.querySelectorAll('video');
-const videoWrappers = document.querySelectorAll('.video-wrapper');
-
-let currentlyPlaying = null;
-
-function pauseAllOtherVideos(videoId) {
-    allVideos.forEach(v => {
-        if (v.id !== videoId && !v.paused) {
-            v.pause();
-            const wrapper = v.closest('.video-wrapper');
-            if (wrapper) {
-                const overlay = wrapper.querySelector('.video-play-overlay');
-                if (overlay) overlay.classList.add('visible');
-                const playBtn = wrapper.querySelector('.play-btn');
-                if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                closeMobileMenu();
             }
+        });
+
+        // ---------- FLOATING SOCIAL TOGGLE (arrow icon) ----------
+        const socialIcons = document.getElementById('socialIcons');
+        const toggleBtn = document.getElementById('socialToggle');
+        const toggleIcon = document.getElementById('toggleIcon');
+        let socialHidden = false;
+
+        toggleBtn.addEventListener('click', function() {
+            socialHidden = !socialHidden;
+            socialIcons.classList.toggle('hidden', socialHidden);
+            toggleIcon.className = socialHidden ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
+        });
+
+        // ---------- SECTION ANIMATIONS ----------
+        const animatedSections = document.querySelectorAll('.section-animate, .stagger-children');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.08,
+            rootMargin: '0px 0px -30px 0px'
+        });
+        animatedSections.forEach(section => {
+            sectionObserver.observe(section);
+        });
+
+        // ---------- IMAGE LIGHTBOX ----------
+        const imageLightbox = document.getElementById('imageLightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const imageLightboxClose = document.getElementById('imageLightboxClose');
+
+        document.querySelectorAll('.solution-card img, .gallery-card img, .ba-card img').forEach(img => {
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                lightboxImage.src = this.src;
+                lightboxImage.alt = this.alt || 'Full screen image';
+                imageLightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        imageLightboxClose.addEventListener('click', function() {
+            imageLightbox.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+
+        imageLightbox.addEventListener('click', function(e) {
+            if (e.target === imageLightbox) {
+                imageLightbox.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && imageLightbox.classList.contains('open')) {
+                imageLightbox.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ---------- VIDEO CONTROLS (Play/Pause, Mute/Unmute, One at a time) ----------
+        const allVideos = document.querySelectorAll('video');
+        const videoWrappers = document.querySelectorAll('.video-wrapper');
+
+        let currentlyPlaying = null;
+
+        function pauseAllOtherVideos(videoId) {
+            allVideos.forEach(v => {
+                if (v.id !== videoId && !v.paused) {
+                    v.pause();
+                    const wrapper = v.closest('.video-wrapper');
+                    if (wrapper) {
+                        const overlay = wrapper.querySelector('.video-play-overlay');
+                        if (overlay) overlay.classList.add('visible');
+                        const playBtn = wrapper.querySelector('.play-btn');
+                        if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    }
+                }
+            });
         }
-    });
-}
 
-videoWrappers.forEach(wrapper => {
-    const video = wrapper.querySelector('video');
-    if (!video) return;
+        videoWrappers.forEach(wrapper => {
+            const video = wrapper.querySelector('video');
+            if (!video) return;
 
-    const playBtn = wrapper.querySelector('.play-btn');
-    const muteBtn = wrapper.querySelector('.mute-btn');
-    const overlay = wrapper.querySelector('.video-play-overlay');
+            const playBtn = wrapper.querySelector('.play-btn');
+            const muteBtn = wrapper.querySelector('.mute-btn');
+            const overlay = wrapper.querySelector('.video-play-overlay');
 
-    if (playBtn) {
-        playBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            if (video.paused) {
-                pauseAllOtherVideos(video.id);
-                video.play();
-                this.innerHTML = '<i class="fas fa-pause"></i>';
+            if (playBtn) {
+                playBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (video.paused) {
+                        pauseAllOtherVideos(video.id);
+                        video.play();
+                        this.innerHTML = '<i class="fas fa-pause"></i>';
+                        if (overlay) overlay.classList.remove('visible');
+                        currentlyPlaying = video.id;
+                    } else {
+                        video.pause();
+                        this.innerHTML = '<i class="fas fa-play"></i>';
+                        if (overlay) overlay.classList.add('visible');
+                    }
+                });
+            }
+
+            if (muteBtn) {
+                muteBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    video.muted = !video.muted;
+                    this.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+                });
+            }
+
+            wrapper.addEventListener('click', function(e) {
+                if (e.target.closest('.video-controls')) return;
+
+                if (video.paused) {
+                    pauseAllOtherVideos(video.id);
+                    video.play();
+                    if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    if (overlay) overlay.classList.remove('visible');
+                    currentlyPlaying = video.id;
+                } else {
+                    video.pause();
+                    if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    if (overlay) overlay.classList.add('visible');
+                }
+            });
+
+            video.addEventListener('play', function() {
                 if (overlay) overlay.classList.remove('visible');
-                currentlyPlaying = video.id;
-            } else {
-                video.pause();
-                this.innerHTML = '<i class="fas fa-play"></i>';
+                if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            });
+
+            video.addEventListener('pause', function() {
                 if (overlay) overlay.classList.add('visible');
+                if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
+            });
+
+            if (muteBtn) {
+                muteBtn.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+            }
+
+            if (video.paused && overlay) {
+                overlay.classList.add('visible');
             }
         });
-    }
 
-    if (muteBtn) {
-        muteBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            video.muted = !video.muted;
-            this.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
+        // ---------- FAQ ACCORDION ----------
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', function() {
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    if (other !== item) other.classList.remove('active');
+                });
+                item.classList.toggle('active');
+            });
         });
-    }
 
-    wrapper.addEventListener('click', function(e) {
-        if (e.target.closest('.video-controls')) return;
-
-        if (video.paused) {
-            pauseAllOtherVideos(video.id);
-            video.play();
-            if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            if (overlay) overlay.classList.remove('visible');
-            currentlyPlaying = video.id;
-        } else {
-            video.pause();
-            if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
-            if (overlay) overlay.classList.add('visible');
-        }
-    });
-
-    video.addEventListener('play', function() {
-        if (overlay) overlay.classList.remove('visible');
-        if (playBtn) playBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    });
-
-    video.addEventListener('pause', function() {
-        if (overlay) overlay.classList.add('visible');
-        if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
-    });
-
-    if (muteBtn) {
-        muteBtn.innerHTML = video.muted ? '<i class="fas fa-volume-mute"></i>' : '<i class="fas fa-volume-up"></i>';
-    }
-
-    if (video.paused && overlay) {
-        overlay.classList.add('visible');
-    }
-});
-
-// ---------- FAQ ACCORDION ----------
-document.querySelectorAll('.faq-item').forEach(item => {
-    item.querySelector('.faq-question').addEventListener('click', function() {
-        document.querySelectorAll('.faq-item').forEach(other => {
-            if (other !== item) other.classList.remove('active');
+        // ---------- SMOOTH SCROLL ----------
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
         });
-        item.classList.toggle('active');
-    });
-});
 
-// ---------- SMOOTH SCROLL ----------
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#') return;
-        e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-});
-
-console.log('✨ ENHANCE CLINIC · Hair Transplant Institute');
+        console.log('✨ ENHANCE CLINIC · Hair Transplant Institute');
     </script>
 
 </body>
