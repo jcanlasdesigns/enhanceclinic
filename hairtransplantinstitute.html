@@ -195,9 +195,20 @@
             color: white;
             z-index: 1000;
             margin-left: auto;
+            background: transparent;
+            border: none;
+            padding: 8px 12px;
+            transition: opacity 0.3s ease;
+        }
+        .hamburger.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
         .navbar.scrolled .hamburger {
             color: var(--text-dark);
+        }
+        .hamburger:focus {
+            outline: none;
         }
 
         /* ---------- MOBILE MENU (full screen, white background) ---------- */
@@ -209,28 +220,32 @@
             width: 100%;
             height: 100vh;
             background: var(--white);
-            z-index: 998;
+            z-index: 9998;
             justify-content: center;
             align-items: center;
             flex-direction: column;
             padding: 40px 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         .mobile-menu-overlay.open {
             display: flex;
+            opacity: 1;
         }
         .mobile-menu-overlay .mobile-nav-links {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2.2rem;
+            gap: 2rem;
         }
         .mobile-menu-overlay .mobile-nav-links a {
             color: var(--text-dark);
-            font-size: 1.8rem;
-            font-weight: 400;
+            font-size: 1.6rem;
+            font-weight: 500;
             transition: 0.2s;
             letter-spacing: 1px;
-            font-family: 'Instrument Serif', serif;
+            font-family: 'Space Grotesk', sans-serif;
+            padding: 6px 16px;
         }
         .mobile-menu-overlay .mobile-nav-links a:hover {
             color: var(--accent);
@@ -243,12 +258,19 @@
             color: var(--text-dark);
             font-size: 2.2rem;
             cursor: pointer;
-            transition: 0.2s;
-            z-index: 999;
+            transition: 0.3s;
+            z-index: 9999;
+            background: transparent;
+            border: none;
+            padding: 12px 16px;
+            line-height: 1;
         }
         .mobile-menu-close:hover {
             transform: rotate(90deg);
             color: var(--accent);
+        }
+        .mobile-menu-close:focus {
+            outline: none;
         }
 
         /* ---------- FLOATING SOCIAL (with wrapper and toggle) ---------- */
@@ -1040,6 +1062,11 @@
             .reel-card .reel-wrapper {
                 padding-bottom: 130%;
             }
+            .mobile-menu-close {
+                top: 24px;
+                right: 24px;
+                padding: 10px 14px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1060,6 +1087,20 @@
             .cause-description { padding: 24px 20px; }
             .reel-card .reel-wrapper {
                 padding-bottom: 140%;
+            }
+            .mobile-menu-overlay .mobile-nav-links a {
+                font-size: 1.4rem;
+                padding: 8px 14px;
+            }
+            .mobile-menu-close {
+                font-size: 1.8rem;
+                top: 20px;
+                right: 20px;
+                padding: 10px 14px;
+            }
+            .hamburger {
+                font-size: 1.4rem;
+                padding: 6px 10px;
             }
         }
     </style>
@@ -1090,7 +1131,9 @@
 
     <!-- ========== MOBILE MENU (full screen, white background) ========== -->
     <div class="mobile-menu-overlay" id="mobileMenu">
-        <div class="mobile-menu-close" id="mobileMenuClose"><i class="fas fa-times"></i></div>
+        <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
         <div class="mobile-nav-links">
             <a href="#">Home</a>
             <a href="#about">About</a>
@@ -1106,7 +1149,9 @@
     <!-- ========== NAV (Centered on desktop, hamburger right on mobile) ========== -->
     <nav class="navbar" id="navbar">
         <div class="container">
-            <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
             <div class="nav-links" id="navLinks">
                 <a href="#">Home</a>
                 <a href="#about">About</a>
@@ -1402,7 +1447,7 @@
                     <p><i class="fas fa-map-pin"></i> Waze: Enhance by Doc Ize</p>
                     <p><i class="fas fa-phone"></i> 0976-487-5779</p>
                     <p><i class="far fa-calendar-alt"></i> Tuesday–Sunday · 10AM – 8PM</p>
-                    <p><i class="fas fa-envelope"></i> hello@enhanceclinic.com</p>
+                  <!--  <p><i class="fas fa-envelope"></i> hello@enhanceclinic.com</p> -->
                     <div style="margin-top: 20px; border-radius: 14px; overflow: hidden; height: 200px; background: #dce4ec;">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3868.247146957572!2d121.16113491483994!3d14.179326590294798!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339bd7e4b7f6b1a1%3A0x8b9e8b7f1c8b7f1c!2sSto.%20Tomas%20Batangas!5e0!3m2!1sen!2sph!4v1650000000000" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
@@ -1461,35 +1506,42 @@
             else nav.classList.remove('scrolled');
         });
 
-        // ---------- MOBILE MENU ----------
+        // ---------- MOBILE MENU (FIXED - CLOSE BUTTON WORKS) ----------
         const hamburger = document.getElementById('hamburger');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileMenuClose = document.getElementById('mobileMenuClose');
 
         function openMobileMenu() {
             mobileMenu.classList.add('open');
+            if (hamburger) hamburger.classList.add('hidden');
             document.body.style.overflow = 'hidden';
         }
 
         function closeMobileMenu() {
             mobileMenu.classList.remove('open');
+            if (hamburger) hamburger.classList.remove('hidden');
             document.body.style.overflow = '';
         }
 
+        // Open menu with hamburger click
         if (hamburger) {
             hamburger.addEventListener('click', function(e) {
+                e.preventDefault();
                 e.stopPropagation();
                 openMobileMenu();
             });
         }
 
+        // Close menu with close button - FIXED
         if (mobileMenuClose) {
             mobileMenuClose.addEventListener('click', function(e) {
+                e.preventDefault();
                 e.stopPropagation();
                 closeMobileMenu();
             });
         }
 
+        // Close menu by clicking on overlay background
         if (mobileMenu) {
             mobileMenu.addEventListener('click', function(e) {
                 if (e.target === mobileMenu) {
@@ -1498,14 +1550,16 @@
             });
         }
 
-        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+        // Close menu when clicking on any nav link
+        document.querySelectorAll('.mobile-nav-links a').forEach(function(link) {
             link.addEventListener('click', function() {
                 closeMobileMenu();
             });
         });
 
+        // Close menu with Escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+            if (e.key === 'Escape' && mobileMenu && mobileMenu.classList.contains('open')) {
                 closeMobileMenu();
             }
         });
@@ -1516,16 +1570,18 @@
         const toggleIcon = document.getElementById('toggleIcon');
         let socialHidden = false;
 
-        toggleBtn.addEventListener('click', function() {
-            socialHidden = !socialHidden;
-            socialIcons.classList.toggle('hidden', socialHidden);
-            toggleIcon.className = socialHidden ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
-        });
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                socialHidden = !socialHidden;
+                socialIcons.classList.toggle('hidden', socialHidden);
+                toggleIcon.className = socialHidden ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
+            });
+        }
 
         // ---------- SECTION ANIMATIONS ----------
         const animatedSections = document.querySelectorAll('.section-animate, .stagger-children');
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
+        const sectionObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
@@ -1534,7 +1590,7 @@
             threshold: 0.08,
             rootMargin: '0px 0px -30px 0px'
         });
-        animatedSections.forEach(section => {
+        animatedSections.forEach(function(section) {
             sectionObserver.observe(section);
         });
 
@@ -1543,7 +1599,7 @@
         const lightboxImage = document.getElementById('lightboxImage');
         const imageLightboxClose = document.getElementById('imageLightboxClose');
 
-        document.querySelectorAll('.solution-card img, .gallery-card img, .ba-card img').forEach(img => {
+        document.querySelectorAll('.solution-card img, .gallery-card img, .ba-card img').forEach(function(img) {
             img.addEventListener('click', function(e) {
                 e.stopPropagation();
                 lightboxImage.src = this.src;
@@ -1579,27 +1635,27 @@
         let currentlyPlaying = null;
 
         function pauseAllOtherVideos(videoId) {
-            allVideos.forEach(v => {
+            allVideos.forEach(function(v) {
                 if (v.id !== videoId && !v.paused) {
                     v.pause();
-                    const wrapper = v.closest('.video-wrapper');
+                    var wrapper = v.closest('.video-wrapper');
                     if (wrapper) {
-                        const overlay = wrapper.querySelector('.video-play-overlay');
+                        var overlay = wrapper.querySelector('.video-play-overlay');
                         if (overlay) overlay.classList.add('visible');
-                        const playBtn = wrapper.querySelector('.play-btn');
+                        var playBtn = wrapper.querySelector('.play-btn');
                         if (playBtn) playBtn.innerHTML = '<i class="fas fa-play"></i>';
                     }
                 }
             });
         }
 
-        videoWrappers.forEach(wrapper => {
-            const video = wrapper.querySelector('video');
+        videoWrappers.forEach(function(wrapper) {
+            var video = wrapper.querySelector('video');
             if (!video) return;
 
-            const playBtn = wrapper.querySelector('.play-btn');
-            const muteBtn = wrapper.querySelector('.mute-btn');
-            const overlay = wrapper.querySelector('.video-play-overlay');
+            var playBtn = wrapper.querySelector('.play-btn');
+            var muteBtn = wrapper.querySelector('.mute-btn');
+            var overlay = wrapper.querySelector('.video-play-overlay');
 
             if (playBtn) {
                 playBtn.addEventListener('click', function(e) {
@@ -1662,9 +1718,9 @@
         });
 
         // ---------- FAQ ACCORDION ----------
-        document.querySelectorAll('.faq-item').forEach(item => {
+        document.querySelectorAll('.faq-item').forEach(function(item) {
             item.querySelector('.faq-question').addEventListener('click', function() {
-                document.querySelectorAll('.faq-item').forEach(other => {
+                document.querySelectorAll('.faq-item').forEach(function(other) {
                     if (other !== item) other.classList.remove('active');
                 });
                 item.classList.toggle('active');
@@ -1672,17 +1728,17 @@
         });
 
         // ---------- SMOOTH SCROLL ----------
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
             anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
+                var href = this.getAttribute('href');
                 if (href === '#') return;
                 e.preventDefault();
-                const target = document.querySelector(href);
+                var target = document.querySelector(href);
                 if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        console.log('✨ ENHANCE CLINIC · Hair Transplant Institute');
+        console.log('ENHANCE CLINIC · Hair Transplant Institute');
     </script>
 
 </body>
